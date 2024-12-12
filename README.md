@@ -13,7 +13,7 @@ MAAMOUL is a knowledge-based computational method that integrates metagenomic an
 
 For further details see: Muller E, Baum S, and Borenstein E. __"Detecting Microbiome-Metabolome Alterations in Disease Using Metabolic Networks."__ _In preparation_.
 
-<img src="docs/wiki_figure.png" width="700">
+<img src="man/Figure 1.png" width="700">
 
 ***
 
