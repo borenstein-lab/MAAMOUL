@@ -5,6 +5,7 @@
  - [Installation](#ch2)
  - [Instructions - Running MAAMOUL on your own data](#ch3)
  - [Usage example](#ch4)
+ - [FAQs](#ch5)
 
 <a id="ch1"></a>
 ## Method overview
@@ -55,6 +56,17 @@ maamoul(global_network_edges = 'test_input/enzyme_compound_edges_kegg.csv',
   N_THREADS = 4
 )
 ```
+
+***
+
+<a id="ch5"></a>
+## FAQs
+
+#### What does it mean if MAAMOUL identified a module but it did not come out significant?
+MAAMOUL first identifies significant nodes (i.e., ECs or metabolites that are significantly associated with a phenotype) that are grouped closely in a global metabolic network. These are termed 'modules'. A p-value is then computed per module to describe the likelihood of identifying such a module given the topology of the network and the specific dataset un hand (e.g., the number of significant ECs, the number of significant metabolites, etc.). Intuitively, a non-significant p-value means that the identified module could have resulted from data characteristics and random chance rather than actual biological signal.
+
+#### MAAMOUL has identified a microbiome-metabolome module in my data, however I see there are additional significant nodes (ECs/metabolite) in proximity to the identified module. Why weren't these nodes added to the identified module?
+Most likely, the significant nodes that weren't included in the identified module were initially assigned to another module, which eventually did not meet the module significance threshold. Future method versions will include an option for post-processing of modules, potentially merging them with nearby nodes as long as modules' significance isn't harmed.
 
 *** 
 
