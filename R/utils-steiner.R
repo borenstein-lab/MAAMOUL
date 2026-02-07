@@ -18,7 +18,7 @@ steinertree_KB <- function(terminals, g) {
   # Make a Steiner Tree from every terminal
   subtrees <- get_connected_comps(g, terminals)
 
-  # Will hold all terminals not in each steiner subtree
+  # Will hold all terminals not in a steiner subtree
   # (Note: This is a "trick" for shortening time on searching for shortest paths.
   #  It is equivalent to the original problem)
   nsubtrees <- lapply(subtrees, function (r) setdiff(terminals, r))
@@ -125,8 +125,8 @@ complete_modules_with_steiner <- function(
   }
 
   # Add p-values and other info
-  complete_modules$pval <- get.vertex.attribute(g, 'pval', complete_modules$node)
-  complete_modules$type <- get.vertex.attribute(g, 'type', complete_modules$node)
+  complete_modules$pval <- vertex_attr(g, 'pval', complete_modules$node)
+  complete_modules$type <- vertex_attr(g, 'type', complete_modules$node)
 
   return(complete_modules)
 }

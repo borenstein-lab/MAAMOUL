@@ -187,7 +187,7 @@ get_anchor_matrix <- function(
     )
 
     # Get the graph induced by red nodes only
-    g_rand <- delete.vertices(g_rand, V(g_rand)[V(g_rand)$color_rand == 2])
+    g_rand <- delete_vertices(g_rand, V(g_rand)[V(g_rand)$color_rand == 2])
 
     # Get shortest distances between every pair of anchor nodes
     anchors_in_g_rand <- anchors[anchors %in% V(g_rand)$name]

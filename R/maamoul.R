@@ -31,7 +31,7 @@
 #'   be treated as 'anchors' (i.e. estimated to be disease-associated).
 #'   Default: 0.1.
 #' @param N_REPEATS The number of random coloring of nodes to perform.
-#' @param MAX_DIST_BTWN_REDS A maximal distance between nodes for them to be
+#' @param MAX_DIST_BTWN_NODES A maximal distance between nodes for them to be
 #'   considered as taking part in the same disease-associated module.
 #'   Default: 4.
 #' @param HCLUST_METHOD Either 'average', 'single' or 'complete'. Default:
@@ -63,7 +63,7 @@
 #'   out_dir = 'test_outputs',
 #'   N_REPEATS = 100,
 #'   N_VAL_PERM = 9,
-#'   N_THREADS = 4
+#'   N_THREADS = 2
 #'   )
 maamoul <- function(
   global_network_edges,
@@ -74,7 +74,7 @@ maamoul <- function(
   SEED = 710,
   NODE_FDR_THRESHOLD = 0.1,
   N_REPEATS = 1000,
-  MAX_DIST_BTWN_REDS = 4,
+  MAX_DIST_BTWN_NODES = 4,
   HCLUST_METHOD = 'average',
   CUTREE_H = 0.8,
   MIN_MOD_SIZE = 3,
@@ -85,7 +85,7 @@ maamoul <- function(
   N_THREADS = 1
 ) {
 
-  # Check that all required packages are installed
+  # Check that all required packages are installed ----
   installed <- rownames(installed.packages())
   if (! "tidyr" %in% installed)        stop("Please install package 'tidyr'")
   if (! "dplyr" %in% installed)        stop("Please install package 'dplyr'")
@@ -101,7 +101,7 @@ maamoul <- function(
   if (! "doSNOW" %in% installed)       stop("Please install package 'stringr'")
   if (! "conflicted" %in% installed)   stop("Please install package 'conflicted'")
 
-  # Required packages
+  # Required packages ----
   suppressMessages(require(tidyr))        # Tested with version:
   suppressMessages(require(dplyr))        # Tested with version:
   suppressMessages(require(readr))        # Tested with version:
@@ -118,8 +118,10 @@ maamoul <- function(
   conflict_prefer("select", "dplyr", quiet = T)
   conflict_prefer("filter", "dplyr", quiet = T)
   conflict_prefer("as_data_frame", "igraph", quiet = T)
+  conflict_prefer("intersect", "base", quiet = T)
+  conflict_prefer("setdiff", "base", quiet = T)
 
-  # Verify that all parameters are valid
+  # Verify that all parameters are valid ----
   if (!file.exists(global_network_edges))      log_error('Invalid *global_network_edges* argument. File not found')
   if (!file.exists(ec_pvals))                  log_error('Invalid *ec_pvals* argument. File not found')
   if (!file.exists(metabolite_pvals))          log_error('Invalid *metabolite_pvals* argument. File not found')
@@ -127,8 +129,8 @@ maamoul <- function(
   if (NODE_FDR_THRESHOLD <= 0 | NODE_FDR_THRESHOLD >= 1) log_error('Invalid *NODE_FDR_THRESHOLD* argument. Should be a number between 0 and 1 (recommended: <= 0.1)')
   if (!is.numeric(N_REPEATS))                  log_error('Invalid *N_REPEATS* argument. Should be an integer > 10')
   if (N_REPEATS < 10)                          log_error('Invalid *N_REPEATS* argument. Should be an integer > 10')
-  if (!is.numeric(MAX_DIST_BTWN_REDS))         log_error('Invalid *MAX_DIST_BTWN_REDS* argument. Should be an integer (recommended values 2-5)')
-  if (MAX_DIST_BTWN_REDS < 2 | MAX_DIST_BTWN_REDS > 6) log_error('Invalid *MAX_DIST_BTWN_REDS* argument. Should be an integer (recommended values 2-5)')
+  if (!is.numeric(MAX_DIST_BTWN_NODES))         log_error('Invalid *MAX_DIST_BTWN_NODES* argument. Should be an integer (recommended values 2-5)')
+  if (MAX_DIST_BTWN_NODES < 2 | MAX_DIST_BTWN_NODES > 6) log_error('Invalid *MAX_DIST_BTWN_NODES* argument. Should be an integer (recommended values 2-5)')
   if (!is.numeric(CUTREE_H))                   log_error('Invalid *CUTREE_H* argument. Should be a number between 0 and 1')
   if (CUTREE_H <= 0 | CUTREE_H >= 1)           log_error('Invalid *CUTREE_H* argument. Should be a number between 0 and 1')
   if (!is.numeric(MIN_MOD_SIZE))               log_error('Invalid *MIN_MOD_SIZE* argument. Should be an integer > 0')
@@ -147,7 +149,7 @@ maamoul <- function(
   # For rounding issues
   EPS = 0.000000001
 
-  # Create required output folders
+  # Create required output folders ----
   if (dir.exists(out_dir)) log_info('Output directory "',out_dir,'" already exists. Files may be overriden.')
   dir.create(out_dir, showWarnings = F, recursive = T)
 
@@ -157,7 +159,7 @@ maamoul <- function(
   set.seed(SEED)
 
   # ----------------------------------------------------------------------------
-  # 1. Read input files
+  # 1. Read input files ----
   # ----------------------------------------------------------------------------
 
   input <- read_inputs(global_network_edges, ec_pvals, metabolite_pvals)
@@ -178,10 +180,10 @@ maamoul <- function(
            ' network nodes are observed in the data.')
 
   # ----------------------------------------------------------------------------
-  # 2. Model p-values as beta-uniform mixture models and mark anchor nodes
+  # 2. Model p-values as beta-uniform mixture models and mark anchor nodes ----
   # ----------------------------------------------------------------------------
-
-  # Fit a mixture model for the metabolite p-values
+  
+  # Fit a mixture model for the metabolite p-values ----
   #  (+ save plots describing the model's fit)
   bum_mtb <- fit_bum_model(
     input$mtb_pvals,
@@ -189,7 +191,7 @@ maamoul <- function(
     plot_dir = out_dir
   )
 
-  # Calculate a threshold for metabolite p-values corresponding to the desired FDR.
+  # Calculate a threshold for metabolite p-values corresponding to the desired FDR. ----
   # This threshold will be used for defining "anchor" nodes.
   # See explanation about the formula here:
   #  https://academic.oup.com/bioinformatics/article/19/10/1236/184434
@@ -200,11 +202,12 @@ maamoul <- function(
   if (mtb_thres < 0.001) mtb_thres <- 0.001 # We define a minimal threshold for cases where BUM-based thresholds are extremely low
   log_info('Metabolite p-value threshold based on BUM: ', mtb_thres, '.')
 
-  # Mark metabolites as either anchor nodes (1) or not (2)
-  input$mtb_pvals$anchor <- ifelse(input$mtb_pvals$pval < mtb_thres, 1, 2)
-  n_mtb_anchors <- sum(input$mtb_pvals$anchor == 1)
+  # Mark metabolites as either anchor nodes (1) or not (2) ----
+  input$mtb_pvals$anchor <- ifelse(input$mtb_pvals$pval <= mtb_thres, 1, 2)
+  n_mtb_anchors <- sum(input$mtb_pvals$anchor == 1 & input$mtb_pvals$feature %in% input$all_net_nodes)
 
-  # Now apply the exact same steps - to the EC's
+  # Now apply the exact same steps - to the EC's ----
+  # Fit a mixture model for the EC p-values (+ save plots describing the model's fit)
   bum_ec <- fit_bum_model(
     input$ec_pvals,
     node_type = 'ec',
@@ -213,10 +216,11 @@ maamoul <- function(
   ec_thres <- fdrThreshold(NODE_FDR_THRESHOLD, bum_ec) %>% round(4)
   if (ec_thres < 0.001) ec_thres <- 0.001
   log_info('EC p-value threshold based on BUM: ', ec_thres, '.')
-  input$ec_pvals$anchor <- ifelse(input$ec_pvals$pval < ec_thres, 1, 2)
-  n_ec_anchors <- sum(input$ec_pvals$anchor == 1)
+  
+  input$ec_pvals$anchor <- ifelse(input$ec_pvals$pval <= ec_thres, 1, 2)
+  n_ec_anchors <- sum(input$ec_pvals$anchor == 1 & input$ec_pvals$feature %in% input$all_net_nodes)
 
-  # Save mixture model parameters
+  # Save mixture model parameters ----
   data.frame(
     node_type = c('EC','Metabolite'),
     BUM_param_a = c(bum_ec$a, bum_mtb$a),
@@ -233,7 +237,7 @@ maamoul <- function(
   log_info('Found ', n_ec_anchors, ' EC anchor nodes and ', n_mtb_anchors, ' metabolite anchor nodes.')
 
   # ----------------------------------------------------------------------------
-  # 3. Initialize graph
+  # 3. Initialize graph ----
   # ----------------------------------------------------------------------------
 
   # Initialize a graph with nodes marked as either anchors (1), non-anchors (2),
@@ -244,15 +248,16 @@ maamoul <- function(
     input$ec_pvals
   )
 
-  # Save node information for later
+  # Save node information for later ----
   anchor_nodes <- V(g_init)$name[V(g_init)$anchor == 1]
   g_nodes <- as_data_frame(g_init, 'vertices')
 
   # ----------------------------------------------------------------------------
-  # 4. For each pair of anchor nodes, calculate the probability of them being
-  #  connected in a disease-associated module.
+  # 4. Calculate probabilities of anchor nodes being connected in the same module ----
   # ----------------------------------------------------------------------------
-
+  # For each pair of anchor nodes, calculate the probability of them being
+  #  connected in a disease-associated module.
+  
   # Takes a few minutes
   anchors_mat <- get_anchor_matrix(
     g = g_init,
@@ -260,7 +265,7 @@ maamoul <- function(
     bum_mtb = bum_mtb,
     bum_ec = bum_ec,
     N_REPEATS = N_REPEATS,
-    MAX_DIST_BETWEEN_RED_NODES = MAX_DIST_BTWN_REDS
+    MAX_DIST_BETWEEN_RED_NODES = MAX_DIST_BTWN_NODES
   )
 
   # Organize probabilities in a table
@@ -269,7 +274,7 @@ maamoul <- function(
     pivot_longer(cols = -node1, names_to = 'node2', values_to = 'prob')
 
   # ----------------------------------------------------------------------------
-  # 5. Extract modules based on a hierarchical clustering
+  # 5. Extract modules based on a hierarchical clustering ----
   # ----------------------------------------------------------------------------
 
   modules <- extract_modules_with_hclust(
@@ -289,7 +294,7 @@ maamoul <- function(
   if (nrow(module_assignments) == 0) log_error('No modules identified')
 
   # ----------------------------------------------------------------------------
-  # 6. Complete modules using Steiner tree approach
+  # 6. Complete modules using Steiner tree approach ----
   #    (to assure each module forms a connected subgraph)
   # ----------------------------------------------------------------------------
 
@@ -300,11 +305,11 @@ maamoul <- function(
     )
 
   # ----------------------------------------------------------------------------
-  # 7. Also find modules in node-permuted graphs to later calculate true modules
-  #    significance
+  # 7. Also find modules in node-permuted graphs ----
   # ----------------------------------------------------------------------------
-
-  # Setup local cluster for parallel computing
+  # ...to later calculate true modules significance
+  
+  # Setup local cluster for parallel computing ----
   cl <- makeCluster(N_THREADS)
   registerDoSNOW(cl)
   pb <- txtProgressBar(max = N_VAL_PERM, style = 3)
@@ -333,7 +338,7 @@ maamoul <- function(
                 bum_mtb = bum_mtb,
                 bum_ec = bum_ec,
                 N_REPEATS = N_REPEATS,
-                MAX_DIST_BETWEEN_RED_NODES = MAX_DIST_BTWN_REDS
+                MAX_DIST_BETWEEN_RED_NODES = MAX_DIST_BTWN_NODES
               )
 
               # Now use hierarchical clustering to get modules as before
@@ -350,9 +355,6 @@ maamoul <- function(
               # Note: For the 'null' modules we are only interested in the
               #  number of EC and metabolite anchors and their average p value
               #  per module, so we skip the steiner tree step.
-
-              # # And lastly use steiner algorithm to complete each module into a
-              # #  connected subgraph
               # complete_modules_perm <- complete_modules_with_steiner(
               #   g_permuted,
               #   tmp$modules_overview,
@@ -370,8 +372,9 @@ maamoul <- function(
     modules_perm
   )
 
-  # Finally, compute a p-value per module using the permuted modules.
-
+  # ----------------------------------------------------------------------------
+  # 8. Compute a p-value per module using the permuted modules ----
+  # ----------------------------------------------------------------------------
   # Given a module of n anchor metabolite nodes, m anchor EC nodes, and an
   #  average p-value of p_hat, we ask:
   #  What are the chances of finding a module with at least n anchor metabolites
@@ -392,6 +395,7 @@ maamoul <- function(
     filter(mean_pval_anchors.x >= (mean_pval_anchors.y - EPS)) %>%
     group_by(Permutation_ID, module_id) %>%
     summarise(n_just_as_good_in_run = n(), .groups = 'drop')
+  
   modules_perm <- modules_perm %>%
     left_join(tmp, by = c('module_id', 'Permutation_ID'))
 
@@ -456,7 +460,7 @@ maamoul <- function(
     dpi = 1200)
 
   # ----------------------------------------------------------------------------
-  # 8. Save all results to files
+  # 9. Save all results to files
   # ----------------------------------------------------------------------------
 
   # Save graph, module assignments, and module overview

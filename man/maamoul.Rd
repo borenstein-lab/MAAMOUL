@@ -13,7 +13,7 @@ maamoul(
   SEED = 710,
   NODE_FDR_THRESHOLD = 0.1,
   N_REPEATS = 1000,
-  MAX_DIST_BTWN_REDS = 4,
+  MAX_DIST_BTWN_NODES = 4,
   HCLUST_METHOD = "average",
   CUTREE_H = 0.8,
   MIN_MOD_SIZE = 3,
@@ -52,7 +52,7 @@ Default: 0.1.}
 
 \item{N_REPEATS}{The number of random coloring of nodes to perform.}
 
-\item{MAX_DIST_BTWN_REDS}{A maximal distance between nodes for them to be
+\item{MAX_DIST_BTWN_NODES}{A maximal distance between nodes for them to be
 considered as taking part in the same disease-associated module.
 Default: 4.}
 
@@ -102,6 +102,6 @@ maamoul(
   out_dir = 'test_outputs',
   N_REPEATS = 100,
   N_VAL_PERM = 9,
-  N_THREADS = 4
+  N_THREADS = 2
   )
 }
