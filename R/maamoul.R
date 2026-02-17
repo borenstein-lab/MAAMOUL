@@ -122,29 +122,29 @@ maamoul <- function(
   conflict_prefer("setdiff", "base", quiet = T)
 
   # Verify that all parameters are valid ----
-  if (!file.exists(global_network_edges))      log_error('Invalid *global_network_edges* argument. File not found')
-  if (!file.exists(ec_pvals))                  log_error('Invalid *ec_pvals* argument. File not found')
-  if (!file.exists(metabolite_pvals))          log_error('Invalid *metabolite_pvals* argument. File not found')
-  if (!is.numeric(NODE_FDR_THRESHOLD))         log_error('Invalid *NODE_FDR_THRESHOLD* argument. Should be a number between 0 and 1 (recommended: <= 0.1)')
-  if (NODE_FDR_THRESHOLD <= 0 | NODE_FDR_THRESHOLD >= 1) log_error('Invalid *NODE_FDR_THRESHOLD* argument. Should be a number between 0 and 1 (recommended: <= 0.1)')
-  if (!is.numeric(N_REPEATS))                  log_error('Invalid *N_REPEATS* argument. Should be an integer > 10')
-  if (N_REPEATS < 10)                          log_error('Invalid *N_REPEATS* argument. Should be an integer > 10')
-  if (!is.numeric(MAX_DIST_BTWN_NODES))         log_error('Invalid *MAX_DIST_BTWN_NODES* argument. Should be an integer (recommended values 2-5)')
-  if (MAX_DIST_BTWN_NODES < 2 | MAX_DIST_BTWN_NODES > 6) log_error('Invalid *MAX_DIST_BTWN_NODES* argument. Should be an integer (recommended values 2-5)')
-  if (!is.numeric(CUTREE_H))                   log_error('Invalid *CUTREE_H* argument. Should be a number between 0 and 1')
-  if (CUTREE_H <= 0 | CUTREE_H >= 1)           log_error('Invalid *CUTREE_H* argument. Should be a number between 0 and 1')
-  if (!is.numeric(MIN_MOD_SIZE))               log_error('Invalid *MIN_MOD_SIZE* argument. Should be an integer > 0')
-  if (MIN_MOD_SIZE < 1)                        log_error('Invalid *MIN_MOD_SIZE* argument. Should be an integer > 0')
-  if (!is.numeric(MIN_METS_IN_MOD))            log_error('Invalid *MIN_METS_IN_MOD* argument. Should be an integer >= 0')
-  if (MIN_METS_IN_MOD < 0)                     log_error('Invalid *MIN_METS_IN_MOD* argument. Should be an integer >= 0')
-  if (!is.numeric(MIN_ECS_IN_MOD))             log_error('Invalid *MIN_ECS_IN_MOD* argument. Should be an integer >= 0')
-  if (MIN_ECS_IN_MOD < 0)                      log_error('Invalid *MIN_ECS_IN_MOD* argument. Should be an integer >= 0')
-  if (!is.numeric(N_VAL_PERM))                 log_error('Invalid *N_VAL_PERM* argument. Should be an integer > 1')
-  if (N_VAL_PERM <= 1)                         log_error('Invalid *N_VAL_PERM* argument. Should be an integer > 1')
-  if (! HCLUST_METHOD %in% c('complete','average','single')) log_error('Invalid *HCLUST_METHOD* argument. Should be one of "average","single","complete"')
-  if (N_THREADS >= parallel::detectCores() | N_THREADS < 1)  log_error('Invalid *N_THREADS* argument. Should be an integer between 1 and the number of available cores')
-  if (!is.numeric(MODULE_FDR_THRESHOLD))              log_error('Invalid *MODULE_FDR_THRESHOLD* argument. Should be a number between 0 and 1 (recommended: <= 0.2)')
-  if (MODULE_FDR_THRESHOLD <= 0 | MODULE_FDR_THRESHOLD >= 1) log_error('Invalid *MODULE_FDR_THRESHOLD* argument. Should be a number between 0 and 1 (recommended: <= 0.2)')
+  if (!file.exists(global_network_edges))      stop('Invalid *global_network_edges* argument. File not found')
+  if (!file.exists(ec_pvals))                  stop('Invalid *ec_pvals* argument. File not found')
+  if (!file.exists(metabolite_pvals))          stop('Invalid *metabolite_pvals* argument. File not found')
+  if (!is.numeric(NODE_FDR_THRESHOLD))         stop('Invalid *NODE_FDR_THRESHOLD* argument. Should be a number between 0 and 1 (recommended: <= 0.1)')
+  if (NODE_FDR_THRESHOLD <= 0 | NODE_FDR_THRESHOLD >= 1) stop('Invalid *NODE_FDR_THRESHOLD* argument. Should be a number between 0 and 1 (recommended: <= 0.1)')
+  if (!is.numeric(N_REPEATS))                  stop('Invalid *N_REPEATS* argument. Should be an integer > 10')
+  if (N_REPEATS < 10)                          stop('Invalid *N_REPEATS* argument. Should be an integer > 10')
+  if (!is.numeric(MAX_DIST_BTWN_NODES))         stop('Invalid *MAX_DIST_BTWN_NODES* argument. Should be an integer (recommended values 2-5)')
+  if (MAX_DIST_BTWN_NODES < 2 | MAX_DIST_BTWN_NODES > 6) stop('Invalid *MAX_DIST_BTWN_NODES* argument. Should be an integer (recommended values 2-5)')
+  if (!is.numeric(CUTREE_H))                   stop('Invalid *CUTREE_H* argument. Should be a number between 0 and 1')
+  if (CUTREE_H <= 0 | CUTREE_H >= 1)           stop('Invalid *CUTREE_H* argument. Should be a number between 0 and 1')
+  if (!is.numeric(MIN_MOD_SIZE))               stop('Invalid *MIN_MOD_SIZE* argument. Should be an integer > 0')
+  if (MIN_MOD_SIZE < 1)                        stop('Invalid *MIN_MOD_SIZE* argument. Should be an integer > 0')
+  if (!is.numeric(MIN_METS_IN_MOD))            stop('Invalid *MIN_METS_IN_MOD* argument. Should be an integer >= 0')
+  if (MIN_METS_IN_MOD < 0)                     stop('Invalid *MIN_METS_IN_MOD* argument. Should be an integer >= 0')
+  if (!is.numeric(MIN_ECS_IN_MOD))             stop('Invalid *MIN_ECS_IN_MOD* argument. Should be an integer >= 0')
+  if (MIN_ECS_IN_MOD < 0)                      stop('Invalid *MIN_ECS_IN_MOD* argument. Should be an integer >= 0')
+  if (!is.numeric(N_VAL_PERM))                 stop('Invalid *N_VAL_PERM* argument. Should be an integer > 1')
+  if (N_VAL_PERM <= 1)                         stop('Invalid *N_VAL_PERM* argument. Should be an integer > 1')
+  if (! HCLUST_METHOD %in% c('complete','average','single')) stop('Invalid *HCLUST_METHOD* argument. Should be one of "average","single","complete"')
+  if (N_THREADS >= parallel::detectCores() | N_THREADS < 1)  stop('Invalid *N_THREADS* argument. Should be an integer between 1 and the number of available cores')
+  if (!is.numeric(MODULE_FDR_THRESHOLD))              stop('Invalid *MODULE_FDR_THRESHOLD* argument. Should be a number between 0 and 1 (recommended: <= 0.2)')
+  if (MODULE_FDR_THRESHOLD <= 0 | MODULE_FDR_THRESHOLD >= 1) stop('Invalid *MODULE_FDR_THRESHOLD* argument. Should be a number between 0 and 1 (recommended: <= 0.2)')
 
   # For rounding issues
   EPS = 0.000000001
@@ -231,9 +231,9 @@ maamoul <- function(
     write_csv(file.path(out_dir, 'bum_parameters.csv'))
 
   if (n_mtb_anchors == 0)
-    log_error('No anchor metabolites were found. Consider relaxing your FDR threshold.')
+    stop('No anchor metabolites were found. Consider relaxing your FDR threshold.')
   if (n_ec_anchors == 0)
-    log_error('No anchor ECs were found. Consider relaxing your FDR threshold.')
+    stop('No anchor ECs were found. Consider relaxing your FDR threshold.')
   log_info('Found ', n_ec_anchors, ' EC anchor nodes and ', n_mtb_anchors, ' metabolite anchor nodes.')
 
   # ----------------------------------------------------------------------------
@@ -291,7 +291,7 @@ maamoul <- function(
   modules_overview <- modules$modules_overview
 
   log_info('Identified a total of ', nrow(modules_overview),' modules (before significance testing).')
-  if (nrow(module_assignments) == 0) log_error('No modules identified')
+  if (nrow(module_assignments) == 0) {log_info('No modules identified'); return()}
 
   # ----------------------------------------------------------------------------
   # 6. Complete modules using Steiner tree approach ----
