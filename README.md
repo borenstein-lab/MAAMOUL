@@ -3,8 +3,8 @@
 **Table of contents:**
  - [Method overview](#ch1)
  - [Installation](#ch2)
- - [Instructions - Running MAAMOUL on your own data](#ch3)
- - [Usage example](#ch4)
+ - [Quick usage example](#ch4)
+ - [Tutorial - Running MAAMOUL on your own data](#ch3)
  - [FAQs](#ch5)
 
 <a id="ch1"></a>
@@ -35,16 +35,9 @@ library(MAAMOUL)
 Note: The MAAMOUL package is dependant on the installation of the 'BioNet' package [1]. See installation instructions [here](https://www.bioconductor.org/packages/release/bioc/html/BioNet.html).
 
 ***
-   
-<a id="ch3"></a>
-## Instructions - Running MAAMOUL on your own data
-
-_Coming soon..._
-
-***
 
 <a id="ch4"></a>
-## Usage example
+## Quick usage example
 
 ```
 library(MAAMOUL)
@@ -58,6 +51,13 @@ maamoul(global_network_edges = 'test_input/enzyme_compound_edges_kegg.csv',
   N_THREADS = 4
 )
 ```
+
+***
+   
+<a id="ch3"></a>
+## Tutorial - Running MAAMOUL on your own data
+
+📘 Full tutorial: https://borenstein-lab.github.io/MAAMOUL/doc/maamoul_tutorial.html
 
 ***
 
