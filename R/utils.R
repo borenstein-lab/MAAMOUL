@@ -8,26 +8,37 @@
 read_inputs <- function(global_network_edges, ec_pvals, metabolite_pvals) {
 
   # Read clean network files
-  edges <- read_csv(global_network_edges, show_col_types = FALSE)
+  if (is_character(global_network_edges)) {
+    edges <- read_csv(global_network_edges, show_col_types = FALSE)
+  } else { # Users can also provide the data frame if already loaded in R
+    edges <- global_network_edges
+  }
+  
   if (ncol(edges) > 2) log_warn('Only using the first 2 columns of the file: global_network_edges')
   edges <- edges %>% select(1:2) %>% rename(from = 1, to = 2)
 
   # Read node p-values
-  mtb_pvals <- read_delim(
-    metabolite_pvals,
-    show_col_types = FALSE,
-    delim = "\t",
-    escape_double = FALSE,
-    trim_ws = TRUE
-  )
-
-  ec_pvals <- read_delim(
-    ec_pvals,
-    show_col_types = FALSE,
-    delim = "\t",
-    escape_double = FALSE,
-    trim_ws = TRUE
-  )
+  if (is_character(metabolite_pvals)) {
+    mtb_pvals <- read_delim(
+      metabolite_pvals,
+      show_col_types = FALSE,
+      delim = "\t",
+      escape_double = FALSE,
+      trim_ws = TRUE
+    )
+  } else { # Users can also provide the data frame if already loaded in R
+    mtb_pvals <- metabolite_pvals
+  }
+  
+  if (is_character(ec_pvals)) {
+    ec_pvals <- read_delim(
+      ec_pvals,
+      show_col_types = FALSE,
+      delim = "\t",
+      escape_double = FALSE,
+      trim_ws = TRUE
+    )
+  } 
 
   # Verify tables include needed columns
   if (! 'feature' %in% names(ec_pvals)) log_error('Missing a column named "feature" in the ec_pvals table')

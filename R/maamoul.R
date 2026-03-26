@@ -55,11 +55,13 @@
 #' @export
 #'
 #' @examples
-#' write_test_files()
+#' data(edges) 
+#' data(ec_pvals) 
+#' data(mtb_pvals)
 #' maamoul(
-#'   global_network_edges = 'test_input/enzyme_compound_edges_kegg.csv',
-#'   ec_pvals = 'test_input/ec_pvals.tsv',
-#'   metabolite_pvals = 'test_input/mtb_pvals.tsv',
+#'   global_network_edges = edges,
+#'   ec_pvals = ec_pvals,
+#'   metabolite_pvals = mtb_pvals,
 #'   out_dir = 'test_outputs',
 #'   N_REPEATS = 100,
 #'   N_VAL_PERM = 9,
@@ -95,8 +97,8 @@ maamoul <- function(
   if (! "BioNet" %in% installed)       stop("Please install package 'BioNet'")
   if (! "ggplot2" %in% installed)      stop("Please install package 'ggplot2'")
   if (! "RColorBrewer" %in% installed) stop("Please install package 'RColorBrewer'")
-  if (! "dendextend" %in% installed) stop("Please install package 'dendextend'")
-  if (! "cowplot" %in% installed) stop("Please install package 'cowplot'")
+  if (! "dendextend" %in% installed)   stop("Please install package 'dendextend'")
+  if (! "cowplot" %in% installed)      stop("Please install package 'cowplot'")
   if (! "foreach" %in% installed)      stop("Please install package 'conflicted'")
   if (! "doSNOW" %in% installed)       stop("Please install package 'stringr'")
   if (! "conflicted" %in% installed)   stop("Please install package 'conflicted'")
@@ -122,9 +124,9 @@ maamoul <- function(
   conflict_prefer("setdiff", "base", quiet = T)
 
   # Verify that all parameters are valid ----
-  if (!file.exists(global_network_edges))      stop('Invalid *global_network_edges* argument. File not found')
-  if (!file.exists(ec_pvals))                  stop('Invalid *ec_pvals* argument. File not found')
-  if (!file.exists(metabolite_pvals))          stop('Invalid *metabolite_pvals* argument. File not found')
+  if (is.character(global_network_edges) && !file.exists(global_network_edges)) stop('Invalid *global_network_edges* argument. File not found')
+  if (is.character(ec_pvals) && !file.exists(ec_pvals)) stop('Invalid *ec_pvals* argument. File not found')
+  if (is.character(metabolite_pvals) && !file.exists(metabolite_pvals)) stop('Invalid *metabolite_pvals* argument. File not found')
   if (!is.numeric(NODE_FDR_THRESHOLD))         stop('Invalid *NODE_FDR_THRESHOLD* argument. Should be a number between 0 and 1 (recommended: <= 0.1)')
   if (NODE_FDR_THRESHOLD <= 0 | NODE_FDR_THRESHOLD >= 1) stop('Invalid *NODE_FDR_THRESHOLD* argument. Should be a number between 0 and 1 (recommended: <= 0.1)')
   if (!is.numeric(N_REPEATS))                  stop('Invalid *N_REPEATS* argument. Should be an integer > 10')
