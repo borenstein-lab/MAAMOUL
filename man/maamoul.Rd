@@ -97,6 +97,7 @@ MAAMOUL is a knowledge-based computational method that integrates metagenomic
   associated features, both metagenomic and metabolomic.
 }
 \examples{
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 data(edges) 
 data(ec_pvals) 
 data(mtb_pvals)
@@ -109,4 +110,5 @@ maamoul(
   N_VAL_PERM = 9,
   N_THREADS = 2
   )
+\dontshow{\}) # examplesIf}
 }

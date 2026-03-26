@@ -16,7 +16,7 @@ For further details see:
 
 Muller E, Baum S, and Borenstein E. __"MAAMOUL: Metabolic network-based discovery of microbiome-metabolome shifts in disease"__ _In preparation_.
 
-<img src="man/Figure 1.svg" width="800">
+<img src="man/figures/Figure 1.svg" width="800">
 
 ***
 

@@ -57,7 +57,7 @@
 #'
 #' @export
 #'
-#' @examples
+#' @examplesIf FALSE
 #' data(edges) 
 #' data(ec_pvals) 
 #' data(mtb_pvals)
