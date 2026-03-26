@@ -3,8 +3,8 @@
 **Table of contents:**
  - [Method overview](#ch1)
  - [Installation](#ch2)
- - [Instructions - Running MAAMOUL on your own data](#ch3)
- - [Usage example](#ch4)
+ - [Quick usage example](#ch4)
+ - [Tutorial - Running MAAMOUL on your own data](#ch3)
  - [FAQs](#ch5)
 
 <a id="ch1"></a>
@@ -12,9 +12,11 @@
 
 MAAMOUL is a knowledge-based computational method that integrates metagenomic and metabolomic data to identify custom data-driven microbial metabolic modules associated with disease states. Unlike traditional statistical approaches, MAAMOUL leverages prior biological knowledge about bacterial metabolism to link genes to metabolites through a global, microbiome-wide metabolic network, and then projects genes' and metabolites' disease-association scores onto this network. The identified 'modules' are sub-networks in this graph that are significantly enriched with disease-associated features, both metagenomic and metabolomic.
 
-For further details see: Muller E, Baum S, and Borenstein E. __"Detecting Microbiome-Metabolome Alterations in Disease Using Metabolic Networks."__ _In preparation_.
+For further details see:    
 
-<img src="man/Figure 1.svg" width="700">
+Muller E, Baum S, and Borenstein E. __"MAAMOUL: Metabolic network-based discovery of microbiome-metabolome shifts in disease"__ _In preparation_.
+
+<img src="man/Figure 1.svg" width="800">
 
 ***
 
@@ -26,23 +28,16 @@ MAAMOUL can be installed directly from GitHub, by running the following:
 ```
 install.packages("devtools")  
 library(devtools)   
-install_github("efratmuller/MAAMOUL")   
+install_github("borenstein-lab/MAAMOUL")   
 library(MAAMOUL)
 ```
 
 Note: The MAAMOUL package is dependant on the installation of the 'BioNet' package [1]. See installation instructions [here](https://www.bioconductor.org/packages/release/bioc/html/BioNet.html).
 
 ***
-   
-<a id="ch3"></a>
-## Instructions - Running MAAMOUL on your own data
-
-_Coming soon..._
-
-***
 
 <a id="ch4"></a>
-## Usage example
+## Quick usage example
 
 ```
 library(MAAMOUL)
@@ -56,6 +51,13 @@ maamoul(global_network_edges = 'test_input/enzyme_compound_edges_kegg.csv',
   N_THREADS = 4
 )
 ```
+
+***
+   
+<a id="ch3"></a>
+## Tutorial - Running MAAMOUL on your own data
+
+📘 Full tutorial: https://borenstein-lab.github.io/MAAMOUL/doc/maamoul_tutorial.html
 
 ***
 
