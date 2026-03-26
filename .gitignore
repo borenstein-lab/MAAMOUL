@@ -7,3 +7,4 @@
 /test_input
 /test_data
 *.DS_Store
+inst/doc
