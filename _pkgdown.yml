@@ -1,0 +1,8 @@
+url: https://github.com/borenstein-lab/MAAMOUL
+
+template:
+  bootstrap: 5
+  bootswatch: lux  
+
+reference:
+  examples: false
