@@ -26,7 +26,7 @@ MAAMOUL can be installed directly from GitHub, by running the following:
 ```
 install.packages("devtools")  
 library(devtools)   
-install_github("efratmuller/MAAMOUL")   
+install_github("borenstein-lab/MAAMOUL")   
 library(MAAMOUL)
 ```
 
