@@ -3,8 +3,12 @@
 .RData
 .Ruserdata
 *.Rproj
-/test_outputs
+vignettes/test_outputs
 /test_input
 /test_data
 *.DS_Store
 inst/doc
+/doc/
+/Meta/
+docs
+.Rbuildignore

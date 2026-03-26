@@ -1,8 +1,10 @@
 Package: MAAMOUL
+URL: https://github.com/borenstein-lab/MAAMOUL
 Type: Package
 Title: A method for detecting microbiome-metabolome alterations in disease using metabolic networks
 Version: 0.1.0
-Author: Efrat Muller
+Authors@R: 
+    person("Efrat", "Muller", role = c("aut", "cre"))
 Description: TBC
 License: `use_mit_license()`
 Encoding: UTF-8

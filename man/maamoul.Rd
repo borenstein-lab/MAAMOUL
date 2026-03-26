@@ -29,18 +29,21 @@ maamoul(
 included in the global metabolic network. The file should be comma-
 delimited, with the first column listing EC's and the second column listing
 metabolites. Additional columns, if exits, will be ignored. Each row in the
-table indicates an edge between the EC and the metabolite.}
+table indicates an edge between the EC and the metabolite.
+If the table is already loaded in R, it can also be directly provided as a data frame.}
 
 \item{ec_pvals}{A path to a file holding all metagenomic EC features and
 their corresponding p-values representing their association with disease.
 These do not have to be FDR corrected. The file should be tab-delimited,
 with a column named 'feature' holding EC codes in the same format as in
 the global network file, and a 'pval' column holding the p-values. Other
-columns will be ignored.}
+columns will be ignored.
+If the table is already loaded in R, it can also be directly provided as a data frame.}
 
 \item{metabolite_pvals}{Similar to the `ec_pvals` file, but listing
 metabolite p-values. Metabolite codes/names should be in the same format
-as in the global network file.}
+as in the global network file.
+If the table is already loaded in R, it can also be directly provided as a data frame.}
 
 \item{out_dir}{A folder in which all output files will be saved.}
 
@@ -94,11 +97,13 @@ MAAMOUL is a knowledge-based computational method that integrates metagenomic
   associated features, both metagenomic and metabolomic.
 }
 \examples{
-write_test_files()
+data(edges) 
+data(ec_pvals) 
+data(mtb_pvals)
 maamoul(
-  global_network_edges = 'test_input/enzyme_compound_edges_kegg.csv',
-  ec_pvals = 'test_input/ec_pvals.tsv',
-  metabolite_pvals = 'test_input/mtb_pvals.tsv',
+  global_network_edges = edges,
+  ec_pvals = ec_pvals,
+  metabolite_pvals = mtb_pvals,
   out_dir = 'test_outputs',
   N_REPEATS = 100,
   N_VAL_PERM = 9,
