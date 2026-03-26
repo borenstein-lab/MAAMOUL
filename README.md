@@ -12,7 +12,9 @@
 
 MAAMOUL is a knowledge-based computational method that integrates metagenomic and metabolomic data to identify custom data-driven microbial metabolic modules associated with disease states. Unlike traditional statistical approaches, MAAMOUL leverages prior biological knowledge about bacterial metabolism to link genes to metabolites through a global, microbiome-wide metabolic network, and then projects genes' and metabolites' disease-association scores onto this network. The identified 'modules' are sub-networks in this graph that are significantly enriched with disease-associated features, both metagenomic and metabolomic.
 
-For further details see: Muller E, Baum S, and Borenstein E. __"Detecting Microbiome-Metabolome Alterations in Disease Using Metabolic Networks."__ _In preparation_.
+For further details see:    
+
+Muller E, Baum S, and Borenstein E. __"MAAMOUL: Metabolic network-based discovery of microbiome-metabolome shifts in disease"__ _In preparation_.
 
 <img src="man/Figure 1.svg" width="700">
 
