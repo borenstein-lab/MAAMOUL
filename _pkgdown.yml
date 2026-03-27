@@ -2,6 +2,12 @@ url: https://borenstein-lab.github.io/MAAMOUL/
 
 template:
   bootstrap: 5
+  includes:
+    in_header: |
+      <style>
+        html { font-size: 0.85rem; }
+        pre, code { font-size: 0.85rem; }
+      </style>
 
 home:
   sidebar:

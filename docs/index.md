@@ -40,6 +40,9 @@ Note: The MAAMOUL package is dependent on the installation of the
 
 ## Quick usage example
 
+Below is a quick usage example using on pre-compiled input tables based
+on data from Franzosa et al., *Nature Microbiology*, 2019.
+
     # Load package
     library(MAAMOUL)
 
@@ -60,9 +63,9 @@ Note: The MAAMOUL package is dependent on the installation of the
 
 ------------------------------------------------------------------------
 
-## Tutorial - Running MAAMOUL on your own data
+## Step-by-step tutorial
 
-📘 Full tutorial:
+📘 See:
 <https://borenstein-lab.github.io/MAAMOUL/articles/maamoul_tutorial.html>
 
 ------------------------------------------------------------------------

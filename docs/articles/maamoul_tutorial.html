@@ -11,6 +11,10 @@
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="MAAMOUL Tutorial">
+<style>
+  html { font-size: 0.85rem; }
+  pre, code { font-size: 0.85rem; }
+</style>
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -214,8 +218,8 @@ table;<br>
 </li>
 <li>P-value may represent associations in both directions (enriched or
 depleted in the phenotype of interest), or in a single direction (using
-one-sided statistical tests). In the pre-computed example, p-values are
-two-sided, representing any association with the disease.<br>
+one-sided statistical tests). In the pre-computed example, p-values
+represent associations in either direction.<br>
 </li>
 <li>The table should include at least the following columns:
 <code>feature</code> → EC identifier (must match network node names),
@@ -299,26 +303,26 @@ of modules’ significance.</p>
 <span>  N_THREADS <span class="op">=</span> <span class="fl">2</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: package 'graph' was built under R version 4.4.2</span></span>
-<span><span class="co">#&gt; INFO [2026-03-27 01:09:00] Output directory "test_outputs" already exists. Files may be overriden.</span></span>
-<span><span class="co">#&gt; INFO [2026-03-27 01:09:00] Working directory is: /Users/em2035/Library/CloudStorage/OneDrive-UniversityofCambridge/Documents/GitHub/MAAMOUL/vignettes.</span></span>
-<span><span class="co">#&gt; INFO [2026-03-27 01:09:00] Starting module-identification pipeline.</span></span>
-<span><span class="co">#&gt; INFO [2026-03-27 01:09:00] Note that 63 duplicated metabolites were identified and only the ones with minimal p-values are kept.</span></span>
-<span><span class="co">#&gt; INFO [2026-03-27 01:09:00] Note that 29 duplicated ECs were identified and only the ones with minimal p-values are kept.</span></span>
-<span><span class="co">#&gt; INFO [2026-03-27 01:09:00] Loaded network information and feature p-values.</span></span>
-<span><span class="co">#&gt; INFO [2026-03-27 01:09:00] 99 of 174 observed metabolite features are also in the network.</span></span>
-<span><span class="co">#&gt; INFO [2026-03-27 01:09:00] 1004 of 1568 observed EC features are also in the network.</span></span>
-<span><span class="co">#&gt; INFO [2026-03-27 01:09:00] 1103 of 4711 network nodes are observed in the data.</span></span>
-<span><span class="co">#&gt; INFO [2026-03-27 01:09:00] Metabolite p-value threshold based on BUM: 0.1989.</span></span>
-<span><span class="co">#&gt; INFO [2026-03-27 01:09:00] EC p-value threshold based on BUM: 0.0461.</span></span>
-<span><span class="co">#&gt; INFO [2026-03-27 01:09:00] Found 255 EC anchor nodes and 69 metabolite anchor nodes.</span></span>
-<span><span class="co">#&gt; INFO [2026-03-27 01:09:00] Constructed a node-weighted network, with 4711 nodes and 6253 edges.</span></span>
-<span><span class="co">#&gt; INFO [2026-03-27 01:09:00] Starting graph random coloring iterations</span></span>
-<span><span class="co">#&gt; .INFO [2026-03-27 01:09:26] End of graph random coloring iterations</span></span>
-<span><span class="co">#&gt; INFO [2026-03-27 01:09:26] Identified a total of 41 modules (before significance testing).</span></span>
-<span><span class="co">#&gt;   |                                                                              |                                                                      |   0%INFO [2026-03-27 01:09:29] Starting graph random coloring iterations - permuted graphs.</span></span>
-<span><span class="co">#&gt;   |                                                                              |========                                                              |  11%  |                                                                              |================                                                      |  22%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================                                       |  44%  |                                                                              |=======================================                               |  56%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================                |  78%  |                                                                              |==============================================================        |  89%  |                                                                              |======================================================================| 100%INFO [2026-03-27 01:11:51] Finished graph random coloring iterations - permuted graphs.</span></span>
-<span><span class="co">#&gt; INFO [2026-03-27 01:11:51] Computed modules' significance.</span></span>
-<span><span class="co">#&gt; INFO [2026-03-27 01:11:52] Done!</span></span>
+<span><span class="co">#&gt; INFO [2026-03-27 11:11:11] Output directory "test_outputs" already exists. Files may be overriden.</span></span>
+<span><span class="co">#&gt; INFO [2026-03-27 11:11:11] Working directory is: /Users/em2035/Library/CloudStorage/OneDrive-UniversityofCambridge/Documents/GitHub/MAAMOUL/vignettes.</span></span>
+<span><span class="co">#&gt; INFO [2026-03-27 11:11:11] Starting module-identification pipeline.</span></span>
+<span><span class="co">#&gt; INFO [2026-03-27 11:11:11] Note that 63 duplicated metabolites were identified and only the ones with minimal p-values are kept.</span></span>
+<span><span class="co">#&gt; INFO [2026-03-27 11:11:11] Note that 29 duplicated ECs were identified and only the ones with minimal p-values are kept.</span></span>
+<span><span class="co">#&gt; INFO [2026-03-27 11:11:11] Loaded network information and feature p-values.</span></span>
+<span><span class="co">#&gt; INFO [2026-03-27 11:11:11] 99 of 174 observed metabolite features are also in the network.</span></span>
+<span><span class="co">#&gt; INFO [2026-03-27 11:11:11] 1004 of 1568 observed EC features are also in the network.</span></span>
+<span><span class="co">#&gt; INFO [2026-03-27 11:11:11] 1103 of 4711 network nodes are observed in the data.</span></span>
+<span><span class="co">#&gt; INFO [2026-03-27 11:11:11] Metabolite p-value threshold based on BUM: 0.1989.</span></span>
+<span><span class="co">#&gt; INFO [2026-03-27 11:11:11] EC p-value threshold based on BUM: 0.0461.</span></span>
+<span><span class="co">#&gt; INFO [2026-03-27 11:11:11] Found 255 EC anchor nodes and 69 metabolite anchor nodes.</span></span>
+<span><span class="co">#&gt; INFO [2026-03-27 11:11:11] Constructed a node-weighted network, with 4711 nodes and 6253 edges.</span></span>
+<span><span class="co">#&gt; INFO [2026-03-27 11:11:11] Starting graph random coloring iterations</span></span>
+<span><span class="co">#&gt; .INFO [2026-03-27 11:11:38] End of graph random coloring iterations</span></span>
+<span><span class="co">#&gt; INFO [2026-03-27 11:11:40] Identified a total of 41 modules (before significance testing).</span></span>
+<span><span class="co">#&gt;   |                                                                              |                                                                      |   0%INFO [2026-03-27 11:11:44] Starting graph random coloring iterations - permuted graphs.</span></span>
+<span><span class="co">#&gt;   |                                                                              |========                                                              |  11%  |                                                                              |================                                                      |  22%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================                                       |  44%  |                                                                              |=======================================                               |  56%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================                |  78%  |                                                                              |==============================================================        |  89%  |                                                                              |======================================================================| 100%INFO [2026-03-27 11:14:29] Finished graph random coloring iterations - permuted graphs.</span></span>
+<span><span class="co">#&gt; INFO [2026-03-27 11:14:29] Computed modules' significance.</span></span>
+<span><span class="co">#&gt; INFO [2026-03-27 11:14:35] Done!</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="st">"MAAMOUL run completed. Results written to 'test_outputs/'."</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "MAAMOUL run completed. Results written to 'test_outputs/'."</span></span></code></pre></div>
 <p>See <code><a href="../reference/maamoul.html">?maamoul</a></code> for details about the parameters.</p>
@@ -334,7 +338,247 @@ directory (we will explore these outputs in the next section):</p>
 <div class="section level2">
 <h2 id="inspecting-and-interpreting-results">3. Inspecting and interpreting results<a class="anchor" aria-label="anchor" href="#inspecting-and-interpreting-results"></a>
 </h2>
-<p><em>TBC</em></p>
+<p>In this section, we walk through the key outputs and how to interpret
+them.</p>
+<div class="section level3">
+<h3 id="checking-p-value-model-fit">3.1 Checking p-value model fit<a class="anchor" aria-label="anchor" href="#checking-p-value-model-fit"></a>
+</h3>
+<p>MAAMOUL models the distribution of input p-values using a
+beta-uniform mixture (BUM) model, which helps distinguish signal from
+background noise.</p>
+<p>Two diagnostic plots are generated:</p>
+<ul>
+<li>
+<code>mtb_bum_fit.png</code><br>
+</li>
+<li><code>ec_bum_fit.png</code></li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html" class="external-link">include_graphics</a></span><span class="op">(</span><span class="st">"test_outputs/mtb_bum_fit.png"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="test_outputs/mtb_bum_fit.png" class="r-plt" width="350"></p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html" class="external-link">include_graphics</a></span><span class="op">(</span><span class="st">"test_outputs/ec_bum_fit.png"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="test_outputs/ec_bum_fit.png" class="r-plt" width="350"></p>
+<p>Each plot includes a histogram of p-values with the fitted BUM model
+(left) and a Q-Q plot comparing observed vs expected distributions
+(right).</p>
+<p>A reasonable fit will have:</p>
+<ul>
+<li>Enrichment of low p-values (left side)<br>
+</li>
+<li>A smooth fit of the model to the histogram<br>
+</li>
+<li>A Q-Q plot roughly follows the diagonal</li>
+</ul>
+<p>⚠️️ What to do if the fit is poor:</p>
+<p>A poor BUM fit typically indicates that there are too few strongly
+associated features (“anchor nodes”) or that the input signal is weak or
+noisy. In some cases, this simply reflects the underlying biology or the
+available data, and MAAMOUL may not identify meaningful modules. If this
+is unexpected, users may wish to verify that the input p-values were
+computed appropriately (e.g., using suitable normalization and
+statistical models), and that relevant features are well represented in
+the network.</p>
+<p>👉 MAAMOUL relies on having a sufficient number of informative nodes
+to build meaningful modules.</p>
+</div>
+<div class="section level3">
+<h3 id="overview-of-identified-modules">3.2 Overview of identified modules<a class="anchor" aria-label="anchor" href="#overview-of-identified-modules"></a>
+</h3>
+<p>The file <code>modules_overview.csv</code> summarizes all detected
+modules:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">modules_overview</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="st">"test_outputs/modules_overview.csv"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">modules_overview</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   module_id n_anchors n_anchors_metabs n_anchors_ECs mean_pval_anchors</span></span>
+<span><span class="co">#&gt; 1         1         4                1             3       0.014036774</span></span>
+<span><span class="co">#&gt; 2         2         6                1             5       0.013219504</span></span>
+<span><span class="co">#&gt; 3         3        10                1             9       0.004945160</span></span>
+<span><span class="co">#&gt; 4         4         6                3             3       0.031702722</span></span>
+<span><span class="co">#&gt; 5         5         9                3             6       0.017673184</span></span>
+<span><span class="co">#&gt; 6         6         5                1             4       0.003197565</span></span>
+<span><span class="co">#&gt;   module_pval module_FDR</span></span>
+<span><span class="co">#&gt; 1         0.1  0.1138889</span></span>
+<span><span class="co">#&gt; 2         0.1  0.1138889</span></span>
+<span><span class="co">#&gt; 3         0.1  0.1138889</span></span>
+<span><span class="co">#&gt; 4         0.1  0.1138889</span></span>
+<span><span class="co">#&gt; 5         0.1  0.1138889</span></span>
+<span><span class="co">#&gt; 6         0.1  0.1138889</span></span></code></pre></div>
+<p>Alternatively, users can load the .RData file that contains the same
+data frame (and additional objects):</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># load("test_outputs/graph_and_data.rdata")</span></span>
+<span><span class="co"># head(modules_overview)</span></span></code></pre></div>
+<p><strong>Key columns</strong></p>
+<ul>
+<li>
+<code>module_id</code> → unique identifier of the module<br>
+</li>
+<li>
+<code>n_anchors_metabs</code> → number of significant
+disease-associated metabolites included in this module<br>
+</li>
+<li>
+<code>n_anchors_ECs</code> → number of significant
+disease-associated ECs included in this module<br>
+</li>
+<li>
+<code>module_pval</code> → permutation-based module
+significance<br>
+</li>
+<li>
+<code>module_FDR</code> → FDR-corrected significance</li>
+</ul>
+<p>Useful questions to ask:</p>
+<ul>
+<li>How many modules were identified?<br>
+</li>
+<li>How many are statistically significant (e.g., FDR &lt; 0.1)?<br>
+</li>
+<li>Do some modules include both disease-associated ECs and
+disease-associated metabolites?</li>
+</ul>
+<p>Modules that include both data types are often the most biologically
+informative, as they link functional potential with metabolic
+outcomes.</p>
+<p>If no significant modules are found, check the following:</p>
+<ul>
+<li>Do you have enough significant ECs and metabolites?</li>
+<li>Do these features overlap with the network?</li>
+<li>Is the network sufficiently connected?</li>
+<li>Are parameters (e.g., <code>N_REPEATS</code>,
+<code>N_VAL_PERM</code>) too low?</li>
+</ul>
+<p>Note: In this tutorial, we used a small number of permutations for
+speed (<code>N_VAL_PERM = 9</code>). This led to coarse p-value
+estimates. 👉 For real analyses, increase this substantially (e.g.,
+≥99).</p>
+</div>
+<div class="section level3">
+<h3 id="exploring-individual-modules">3.3 Exploring individual modules<a class="anchor" aria-label="anchor" href="#exploring-individual-modules"></a>
+</h3>
+<p>Once interesting modules are identified, you can inspect them in
+detail.</p>
+<p>The file <code>complete_modules.csv</code> contains all nodes
+assigned to each module:</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">complete_modules</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="st">"test_outputs/complete_modules.csv"</span><span class="op">)</span></span>
+<span><span class="va">complete_modules</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">module_id</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="co">#&gt;         node is_anchor module_id         pval       type</span></span>
+<span><span class="co">#&gt; 1     C00041      TRUE         1 0.0086331438 Metabolite</span></span>
+<span><span class="co">#&gt; 2     C01528     FALSE         1           NA Metabolite</span></span>
+<span><span class="co">#&gt; 3     C05172     FALSE         1           NA Metabolite</span></span>
+<span><span class="co">#&gt; 4  EC2.7.9.3      TRUE         1 0.0053129691         EC</span></span>
+<span><span class="co">#&gt; 5  EC2.9.1.1      TRUE         1 0.0414594908         EC</span></span>
+<span><span class="co">#&gt; 6 EC4.4.1.16     FALSE         1 0.0838195436         EC</span></span>
+<span><span class="co">#&gt; 7  EC6.1.1.7      TRUE         1 0.0007414908         EC</span></span></code></pre></div>
+<div class="section level4">
+<h4 id="visualizing-a-module-as-a-network">Visualizing a module as a network<a class="anchor" aria-label="anchor" href="#visualizing-a-module-as-a-network"></a>
+</h4>
+<p>You can visualize a specific module using the underlying graph.</p>
+<p>First, load the graph object:</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="st">"test_outputs/graph_and_data.rdata"</span><span class="op">)</span></span></code></pre></div>
+<p>This provides <code>g_init</code> → the full metabolic network
+(igraph object).</p>
+<p>Then extract and plot the module:</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Get nodes in module 1</span></span>
+<span><span class="va">module_nodes</span> <span class="op">&lt;-</span> <span class="va">complete_modules</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">module_id</span> <span class="op">==</span> <span class="fl">3</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">node</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Induce subgraph</span></span>
+<span><span class="va">g_sub</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/subgraph.html" class="external-link">induced_subgraph</a></span><span class="op">(</span><span class="va">g_init</span>, vids <span class="op">=</span> <span class="va">module_nodes</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Basic plot</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">g_sub</span>, vertex.size <span class="op">=</span> <span class="fl">10</span>, vertex.label.color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="maamoul_tutorial_files/figure-html/unnamed-chunk-14-1.png" class="r-plt" width="576"></p>
+<p>Or use a more advanced visualization:</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Color nodes by type</span></span>
+<span><span class="va">type_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"Metabolite"</span> <span class="op">=</span> <span class="st">"chocolate2"</span>,</span>
+<span>  <span class="st">"EC"</span> <span class="op">=</span> <span class="st">"mediumpurple"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Use lighter shaed for nodes not observed in the actual data (not measured by metagenomics/metabolomics)</span></span>
+<span><span class="va">light_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"Metabolite"</span> <span class="op">=</span> <span class="st">"#FAD6BC"</span>,</span>
+<span>  <span class="st">"EC"</span> <span class="op">=</span> <span class="st">"#DFD4F4"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">node_type</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://r.igraph.org/reference/V.html" class="external-link">V</a></span><span class="op">(</span><span class="va">g_sub</span><span class="op">)</span><span class="op">$</span><span class="va">type</span><span class="op">)</span></span>
+<span><span class="va">is_observed</span> <span class="op">&lt;-</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="fu"><a href="https://r.igraph.org/reference/V.html" class="external-link">V</a></span><span class="op">(</span><span class="va">g_sub</span><span class="op">)</span><span class="op">$</span><span class="va">pval</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://r.igraph.org/reference/V.html" class="external-link">V</a></span><span class="op">(</span><span class="va">g_sub</span><span class="op">)</span><span class="op">$</span><span class="va">color</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span></span>
+<span>  <span class="va">is_observed</span>,</span>
+<span>  <span class="va">type_colors</span><span class="op">[</span><span class="va">node_type</span><span class="op">]</span>,</span>
+<span>  <span class="va">light_colors</span><span class="op">[</span><span class="va">node_type</span><span class="op">]</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Size based on p-value (inverse relationship)</span></span>
+<span><span class="co">## Add small epsilon to avoid log(0)</span></span>
+<span><span class="va">eps</span> <span class="op">&lt;-</span> <span class="fl">1e-10</span></span>
+<span><span class="va">pvals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/V.html" class="external-link">V</a></span><span class="op">(</span><span class="va">g_sub</span><span class="op">)</span><span class="op">$</span><span class="va">pval</span> <span class="op">+</span> <span class="va">eps</span></span>
+<span><span class="va">pvals</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">pvals</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="co"># Replace invalid values</span></span>
+<span><span class="va">sizes</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log10</a></span><span class="op">(</span><span class="va">pvals</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://r.igraph.org/reference/V.html" class="external-link">V</a></span><span class="op">(</span><span class="va">g_sub</span><span class="op">)</span><span class="op">$</span><span class="va">size</span> <span class="op">&lt;-</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/rescale.html" class="external-link">rescale</a></span><span class="op">(</span><span class="va">sizes</span>, to <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">8</span>, <span class="fl">30</span><span class="op">)</span><span class="op">)</span> <span class="co"># Rescale</span></span>
+<span></span>
+<span><span class="co">## Plot</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span></span>
+<span>  <span class="va">g_sub</span>,</span>
+<span>  vertex.frame.color <span class="op">=</span> <span class="st">"grey30"</span>,</span>
+<span>  edge.color <span class="op">=</span> <span class="st">"grey80"</span>,</span>
+<span>  vertex.label.color <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>  vertex.label.cex <span class="op">=</span> <span class="fl">0.7</span>,</span>
+<span>  vertex.label.family <span class="op">=</span> <span class="st">"sans"</span>,</span>
+<span>  vertex.label.dist <span class="op">=</span> <span class="fl">1.7</span>,   <span class="co"># move labels outward</span></span>
+<span>  vertex.label.degree <span class="op">=</span> <span class="fl">3</span><span class="op">*</span><span class="va">pi</span><span class="op">/</span><span class="fl">2</span>,   </span>
+<span>  main <span class="op">=</span> <span class="st">"MAAMOUL module 3"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p><img src="maamoul_tutorial_files/figure-html/unnamed-chunk-15-1.png" class="r-plt" width="576"></p>
+</div>
+</div>
+<div class="section level3">
+<h3 id="possible-next-steps">3.4 Possible next steps<a class="anchor" aria-label="anchor" href="#possible-next-steps"></a>
+</h3>
+<p><strong>Compare modules to known metabolic pathways</strong></p>
+<p>You may want to assess whether identified modules overlap with known
+metabolic pathways (e.g., from KEGG or MetaCyc). This can help
+contextualize the module within known biological processes, and possibly
+highlight specific areas of the pathway that are specifically perturbed
+in disease states. Some modules may also lie on the intersection of
+several metabolic pathways.</p>
+<p><strong>Examine direction of association</strong></p>
+<p>While MAAMOUL identifies modules enriched for significant features,
+it is also important to examine the direction of effects: Are
+ECs/metabolites consistently increased or decreased in disease? Do
+modules show coherent trends, or mixed signals?</p>
+<p><strong>Integrate with external data</strong></p>
+<p>Where possible, integrate modules with other data sources such as
+additional host phenotypes or clinical variables, other omics layers
+(e.g., transcriptomics, proteomics), or dietary data. This can help
+place modules in a broader biological context.</p>
+<p><strong>Map ECs back to taxa</strong></p>
+<p>Given our microbiome focus, you may want to check: Which taxa encode
+the ECs in a module? Are specific microbes driving the signal?</p>
+<p><strong>Identify hub or key driver nodes</strong></p>
+<p>Nodes with high connectivity within modules and highly significant
+disease-assocations may represent key functional drivers of a
+module.</p>
+<p><strong>Visualize raw data</strong></p>
+<p>To better understand the direction and magnitude of associations,
+users may wish to inspect the underlying data for features within a
+module. This can be done using boxplots, density plots, or heatmaps of
+feature abundances across samples, stratified by phenotype.</p>
+<p><strong>Validate findings</strong></p>
+<p>To further verify the robustness of your identified modules, you may
+want to replicate your findings in independent datasets, perform
+sensitivity analyses (e.g., varying parameters), or compare with
+alternative methods (e.g. standard pathway-level analysis, for each omic
+independetly).</p>
+</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
