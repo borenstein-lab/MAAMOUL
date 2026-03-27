@@ -1,13 +1,5 @@
-## MAAMOUL: A method for detecting microbiome-metabolome alterations in disease using metabolic networks
+# MAAMOUL: A method for detecting microbiome-metabolome alterations in disease using metabolic networks
 
-**Table of contents:**
- - [Method overview](#ch1)
- - [Installation](#ch2)
- - [Quick usage example](#ch4)
- - [Tutorial - Running MAAMOUL on your own data](#ch3)
- - [FAQs](#ch5)
-
-<a id="ch1"></a>
 ## Method overview
 
 MAAMOUL is a knowledge-based computational method that integrates metagenomic and metabolomic data to identify custom data-driven microbial metabolic modules associated with disease states. Unlike traditional statistical approaches, MAAMOUL leverages prior biological knowledge about bacterial metabolism to link genes to metabolites through a global, microbiome-wide metabolic network, and then projects genes' and metabolites' disease-association scores onto this network. The identified 'modules' are sub-networks in this graph that are significantly enriched with disease-associated features, both metagenomic and metabolomic.
@@ -20,7 +12,6 @@ Muller E, Baum S, and Borenstein E. __"MAAMOUL: Metabolic network-based discover
 
 ***
 
-<a id="ch2"></a>
 ## Installation
 
 MAAMOUL can be installed directly from GitHub, by running the following:
@@ -32,19 +23,25 @@ install_github("borenstein-lab/MAAMOUL")
 library(MAAMOUL)
 ```
 
-Note: The MAAMOUL package is dependant on the installation of the 'BioNet' package [1]. See installation instructions [here](https://www.bioconductor.org/packages/release/bioc/html/BioNet.html).
+Note: The MAAMOUL package is dependent on the installation of the 'BioNet' package [1]. See installation instructions [here](https://www.bioconductor.org/packages/release/bioc/html/BioNet.html).
 
 ***
 
-<a id="ch4"></a>
 ## Quick usage example
 
 ```
+# Load package
 library(MAAMOUL)
-write_test_files()
-maamoul(global_network_edges = 'test_input/enzyme_compound_edges_kegg.csv',
-  ec_pvals = 'test_input/ec_pvals.tsv',
-  metabolite_pvals = 'test_input/mtb_pvals.tsv',
+
+# Load pre-compiled data tables
+data(edges)
+data(ec_pvals)
+data(mtb_pvals)
+
+# Run MAAMOUL
+maamoul(global_network_edges = edges,
+  ec_pvals = ec_pvals,
+  metabolite_pvals = mtb_pvals,
   out_dir = 'test_outputs',
   N_REPEATS = 100,
   N_VAL_PERM = 9,
@@ -53,15 +50,13 @@ maamoul(global_network_edges = 'test_input/enzyme_compound_edges_kegg.csv',
 ```
 
 ***
-   
-<a id="ch3"></a>
+
 ## Tutorial - Running MAAMOUL on your own data
 
-📘 Full tutorial: https://borenstein-lab.github.io/MAAMOUL/doc/maamoul_tutorial.html
+📘 Full tutorial: https://borenstein-lab.github.io/MAAMOUL/articles/maamoul_tutorial.html
 
 ***
 
-<a id="ch5"></a>
 ## FAQs
 
 #### What does it mean if MAAMOUL identified a module but it did not come out significant?
@@ -72,7 +67,7 @@ Most likely, the significant nodes that weren't included in the identified modul
 
 *** 
 
-For questions about the pipeline, please open an issue (https://github.com/efratmuller/MAAMOUL/issues) or contact Prof. Elhanan Borenstein at elbo@tauex.tau.ac.il.
+For questions about the pipeline, please open an issue (https://github.com/borenstein-lab/MAAMOUL/issues) or contact Prof. Elhanan Borenstein at elbo@tauex.tau.ac.il.
 
 ***
 

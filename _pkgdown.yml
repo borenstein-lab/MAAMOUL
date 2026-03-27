@@ -1,4 +1,8 @@
-url: https://github.com/borenstein-lab/MAAMOUL
+url: https://borenstein-lab.github.io/MAAMOUL/
 
 template:
   bootstrap: 5
+
+home:
+  sidebar:
+    structure: [toc, links]
