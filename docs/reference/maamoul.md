@@ -1,0 +1,147 @@
+# MAAMOUL: A method for detecting microbiome-metabolome alterations in disease using metabolic networks
+
+MAAMOUL is a knowledge-based computational method that integrates
+metagenomic and metabolomic data to identify custom data-driven
+microbial metabolic modules associated with disease states. Unlike
+traditional statistical approaches, MAAMOUL leverages prior biological
+knowledge about bacterial metabolism to link genes to metabolites
+through a global, microbiome-wide metabolic network, and then projects
+genes' and metabolites' disease- association scores onto this network.
+The identified 'modules' are sub-networks in this graph that are
+significantly enriched with disease- associated features, both
+metagenomic and metabolomic.
+
+## Usage
+
+``` r
+maamoul(
+  global_network_edges,
+  ec_pvals,
+  metabolite_pvals,
+  out_dir,
+  SEED = 710,
+  NODE_FDR_THRESHOLD = 0.1,
+  N_REPEATS = 1000,
+  MAX_DIST_BTWN_NODES = 4,
+  HCLUST_METHOD = "average",
+  CUTREE_H = 0.8,
+  MIN_MOD_SIZE = 3,
+  MIN_ECS_IN_MOD = 0,
+  MIN_METS_IN_MOD = 0,
+  N_VAL_PERM = 99,
+  MODULE_FDR_THRESHOLD = 0.2,
+  N_THREADS = 1
+)
+```
+
+## Arguments
+
+- global_network_edges:
+
+  A path to a file holding the list of edges to be included in the
+  global metabolic network. The file should be comma- delimited, with
+  the first column listing EC's and the second column listing
+  metabolites. Additional columns, if exits, will be ignored. Each row
+  in the table indicates an edge between the EC and the metabolite. If
+  the table is already loaded in R, it can also be directly provided as
+  a data frame.
+
+- ec_pvals:
+
+  A path to a file holding all metagenomic EC features and their
+  corresponding p-values representing their association with disease.
+  These do not have to be FDR corrected. The file should be
+  tab-delimited, with a column named 'feature' holding EC codes in the
+  same format as in the global network file, and a 'pval' column holding
+  the p-values. Other columns will be ignored. If the table is already
+  loaded in R, it can also be directly provided as a data frame.
+
+- metabolite_pvals:
+
+  Similar to the \`ec_pvals\` file, but listing metabolite p-values.
+  Metabolite codes/names should be in the same format as in the global
+  network file. If the table is already loaded in R, it can also be
+  directly provided as a data frame.
+
+- out_dir:
+
+  A folder in which all output files will be saved.
+
+- SEED:
+
+  An integer to be used as a seed for result reproducibility.
+
+- NODE_FDR_THRESHOLD:
+
+  The FDR threshold to determine which nodes should be treated as
+  'anchors' (i.e. estimated to be disease-associated). Default: 0.1.
+
+- N_REPEATS:
+
+  The number of random coloring of nodes to perform.
+
+- MAX_DIST_BTWN_NODES:
+
+  A maximal distance between nodes for them to be considered as taking
+  part in the same disease-associated module. Default: 4.
+
+- HCLUST_METHOD:
+
+  Either 'average', 'single' or 'complete'. Default: 'average'. See
+  \`?hclust\`.
+
+- CUTREE_H:
+
+  The height at which the hierarchical tree is cut to determine
+  clusters.
+
+- MIN_MOD_SIZE:
+
+  The minimal size of a module to be outputted. Default: 3.
+
+- MIN_ECS_IN_MOD:
+
+  Modules with less than this number of EC nodes will be discarded.
+  Default: 0.
+
+- MIN_METS_IN_MOD:
+
+  Modules with less than this number of metabolite nodes will be
+  discarded. Default: 0.
+
+- N_VAL_PERM:
+
+  Number of node-weight permutations to perform for calculating the
+  significance of each module.
+
+- MODULE_FDR_THRESHOLD:
+
+  The FDR threshold to determine which modules are significant.
+
+- N_THREADS:
+
+  Number of threads to use for parallel computing. Verify a sufficient
+  number of cores with \`parallel::detectCores()\` first.
+
+## Value
+
+The method outputs several tables and plots to the \`out_dir\` folder.
+
+## Examples
+
+``` r
+if (FALSE) {
+data(edges) 
+data(ec_pvals) 
+data(mtb_pvals)
+maamoul(
+  global_network_edges = edges,
+  ec_pvals = ec_pvals,
+  metabolite_pvals = mtb_pvals,
+  out_dir = 'test_outputs',
+  N_REPEATS = 100,
+  N_VAL_PERM = 9,
+  N_THREADS = 2
+  )
+}
+```

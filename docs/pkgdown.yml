@@ -1,0 +1,9 @@
+pandoc: '3.2'
+pkgdown: 2.2.0
+pkgdown_sha: ~
+articles:
+  maamoul_tutorial: maamoul_tutorial.html
+last_built: 2026-03-27T01:08Z
+urls:
+  reference: https://borenstein-lab.github.io/MAAMOUL/reference
+  article: https://borenstein-lab.github.io/MAAMOUL/articles
