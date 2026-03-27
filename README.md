@@ -29,6 +29,8 @@ Note: The MAAMOUL package is dependent on the installation of the 'BioNet' packa
 
 ## Quick usage example
 
+Below is a quick usage example using on pre-compiled input tables based on data from Franzosa et al., _Nature Microbiology_, 2019.
+
 ```
 # Load package
 library(MAAMOUL)
@@ -51,9 +53,9 @@ maamoul(global_network_edges = edges,
 
 ***
 
-## Tutorial - Running MAAMOUL on your own data
+## Step-by-step tutorial
 
-📘 Full tutorial: https://borenstein-lab.github.io/MAAMOUL/articles/maamoul_tutorial.html
+📘 See: https://borenstein-lab.github.io/MAAMOUL/articles/maamoul_tutorial.html
 
 ***
 
