@@ -57,9 +57,9 @@ Note:
 
 #### Building your own network
 
-Users can construct a network from databases such as KEGG
-(<https://www.genome.jp/kegg/>), MetaCyc (<https://metacyc.org/>), or
-other resources.
+Users can construct a global metabolic network from databases such as
+[KEGG](https://www.genome.jp/kegg/), [MetaCyc](https://metacyc.org/),
+[BiGG](http://bigg.ucsd.edu/), or other resources.
 
 When building a custom network, we recommend:
 
@@ -71,6 +71,25 @@ When building a custom network, we recommend:
   question.  
 - Filtering irrelevant ECs or metabolites based on prior knowledge;  
   → e.g., ECs not linked to bacteria when studying the gut microbiome.
+
+> Note: More curated metabolic reconstructions may improve the
+> biological specificity of the identified modules! Users may
+> potentially construct custom community-wide metabolic networks using
+> genome-scale metabolic reconstruction pipelines (e.g.,
+> [CarveMe](https://doi.org/10.1093/nar/gky537),
+> [metaGEM](https://doi.org/10.1093/nar/gkab815), or
+> [mgPipe](https://doi.org/10.1093/bioinformatics/btac082)) and
+> resources such as
+> [AGORA2](https://www.nature.com/articles/s41587-022-01628-0) or
+> [APOLLO](https://doi.org/10.1016/j.cels.2025.101196). While these
+> metabolic models typically include additional information such as
+> stoichiometry, biomass equations, and other biochemical constraints,
+> MAAMOUL currently utilizes only the network topology (so users will
+> need to extract an undirected bipartite graph connecting
+> enzyme/reaction nodes and metabolite nodes). Users should also ensure
+> that metabolite identifiers used in the metabolomic data are
+> compatible with those used in the selected metabolic model/network,
+> which may require additional metabolite ID conversion steps.
 
 #### Basic network diagnostics
 
@@ -232,27 +251,36 @@ res <- maamoul(
   N_VAL_PERM = 9,
   N_THREADS = 2
 )
-#> Warning: package 'graph' was built under R version 4.4.2
-#> INFO [2026-03-27 11:11:11] Output directory "test_outputs" already exists. Files may be overriden.
-#> INFO [2026-03-27 11:11:11] Working directory is: /Users/em2035/Library/CloudStorage/OneDrive-UniversityofCambridge/Documents/GitHub/MAAMOUL/vignettes.
-#> INFO [2026-03-27 11:11:11] Starting module-identification pipeline.
-#> INFO [2026-03-27 11:11:11] Note that 63 duplicated metabolites were identified and only the ones with minimal p-values are kept.
-#> INFO [2026-03-27 11:11:11] Note that 29 duplicated ECs were identified and only the ones with minimal p-values are kept.
-#> INFO [2026-03-27 11:11:11] Loaded network information and feature p-values.
-#> INFO [2026-03-27 11:11:11] 99 of 174 observed metabolite features are also in the network.
-#> INFO [2026-03-27 11:11:11] 1004 of 1568 observed EC features are also in the network.
-#> INFO [2026-03-27 11:11:11] 1103 of 4711 network nodes are observed in the data.
-#> INFO [2026-03-27 11:11:11] Metabolite p-value threshold based on BUM: 0.1989.
-#> INFO [2026-03-27 11:11:11] EC p-value threshold based on BUM: 0.0461.
-#> INFO [2026-03-27 11:11:11] Found 255 EC anchor nodes and 69 metabolite anchor nodes.
-#> INFO [2026-03-27 11:11:11] Constructed a node-weighted network, with 4711 nodes and 6253 edges.
-#> INFO [2026-03-27 11:11:11] Starting graph random coloring iterations
-#> .INFO [2026-03-27 11:11:38] End of graph random coloring iterations
-#> INFO [2026-03-27 11:11:40] Identified a total of 41 modules (before significance testing).
-#>   |                                                                              |                                                                      |   0%INFO [2026-03-27 11:11:44] Starting graph random coloring iterations - permuted graphs.
-#>   |                                                                              |========                                                              |  11%  |                                                                              |================                                                      |  22%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================                                       |  44%  |                                                                              |=======================================                               |  56%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================                |  78%  |                                                                              |==============================================================        |  89%  |                                                                              |======================================================================| 100%INFO [2026-03-27 11:14:29] Finished graph random coloring iterations - permuted graphs.
-#> INFO [2026-03-27 11:14:29] Computed modules' significance.
-#> INFO [2026-03-27 11:14:35] Done!
+#> INFO [2026-05-09 22:03:18] Output directory "test_outputs" already exists. Files may be overriden.
+#> INFO [2026-05-09 22:03:18] Working directory is: /Users/em2035/Library/CloudStorage/OneDrive-UniversityofCambridge/Documents/GitHub/MAAMOUL/vignettes.
+#> INFO [2026-05-09 22:03:18] Starting module-identification pipeline.
+#> INFO [2026-05-09 22:03:18] Note that 63 duplicated metabolites were identified and only the ones with minimal p-values are kept.
+#> INFO [2026-05-09 22:03:18] Note that 29 duplicated ECs were identified and only the ones with minimal p-values are kept.
+#> INFO [2026-05-09 22:03:18] Loaded network information and feature p-values.
+#> INFO [2026-05-09 22:03:18] 99 of 174 observed metabolite features are also in the network.
+#> INFO [2026-05-09 22:03:18] 1004 of 1568 observed EC features are also in the network.
+#> INFO [2026-05-09 22:03:18] 1103 of 4711 network nodes are observed in the data.
+#> INFO [2026-05-09 22:03:18] Metabolite p-value threshold based on BUM: 0.1989.
+#> INFO [2026-05-09 22:03:18] EC p-value threshold based on BUM: 0.0461.
+#> INFO [2026-05-09 22:03:18] Found 255 EC anchor nodes and 69 metabolite anchor nodes.
+#> INFO [2026-05-09 22:03:18] Constructed a node-weighted network, with 4711 nodes and 6253 edges.
+#> INFO [2026-05-09 22:03:18] Starting graph random coloring iterations
+#> .INFO [2026-05-09 22:03:34] End of graph random coloring iterations
+#> Warning in grSoftVersion(): unable to load shared object '/Library/Frameworks/R.framework/Resources/modules//R_X11.so':
+#>   dlopen(/Library/Frameworks/R.framework/Resources/modules//R_X11.so, 0x0006): Library not loaded: /opt/X11/lib/libSM.6.dylib
+#>   Referenced from: <C09D78D1-7747-3352-8D6A-DBD3D49D82B0> /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/modules/R_X11.so
+#>   Reason: tried: '/opt/X11/lib/libSM.6.dylib' (no such file), '/System/Volumes/Preboot/Cryptexes/OS/opt/X11/lib/libSM.6.dylib' (no such file), '/opt/X11/lib/libSM.6.dylib' (no such file), '/Library/Frameworks/R.framework/Resources/lib/libSM.6.dylib' (no such file), '/Library/Java/JavaVirtualMachines/jdk-11.0.18+10/Contents/Home/lib/server/libSM.6.dylib' (no such file)
+#> Warning in cairoVersion(): unable to load shared object '/Library/Frameworks/R.framework/Resources/library/grDevices/libs//cairo.so':
+#>   dlopen(/Library/Frameworks/R.framework/Resources/library/grDevices/libs//cairo.so, 0x0006): Library not loaded: /opt/X11/lib/libXrender.1.dylib
+#>   Referenced from: <02FE3153-979A-31F7-9F1C-7F836882B951> /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/grDevices/libs/cairo.so
+#>   Reason: tried: '/opt/X11/lib/libXrender.1.dylib' (no such file), '/System/Volumes/Preboot/Cryptexes/OS/opt/X11/lib/libXrender.1.dylib' (no such file), '/opt/X11/lib/libXrender.1.dylib' (no such file), '/Library/Frameworks/R.framework/Resources/lib/libXrender.1.dylib' (no such file), '/Library/Java/JavaVirtualMachines/jdk-11.0.18+10/Contents/Home/lib/server/libXrender.1.dylib' (no such file)
+#> Warning in svg(file = plot_outfile, width = p_width, height = 5): failed to
+#> load cairo DLL
+#> INFO [2026-05-09 22:03:34] Identified a total of 41 modules (before significance testing).
+#>   |                                                                              |                                                                      |   0%INFO [2026-05-09 22:03:39] Starting graph random coloring iterations - permuted graphs.
+#>   |                                                                              |========                                                              |  11%  |                                                                              |================                                                      |  22%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================                                       |  44%  |                                                                              |=======================================                               |  56%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================                |  78%  |                                                                              |==============================================================        |  89%  |                                                                              |======================================================================| 100%INFO [2026-05-09 22:04:58] Finished graph random coloring iterations - permuted graphs.
+#> INFO [2026-05-09 22:04:58] Computed modules' significance.
+#> INFO [2026-05-09 22:04:59] Done!
 print("MAAMOUL run completed. Results written to 'test_outputs/'.")
 #> [1] "MAAMOUL run completed. Results written to 'test_outputs/'."
 ```
@@ -339,12 +367,12 @@ head(modules_overview)
 #> 5         5         9                3             6       0.017673184
 #> 6         6         5                1             4       0.003197565
 #>   module_pval module_FDR
-#> 1         0.1  0.1138889
-#> 2         0.1  0.1138889
-#> 3         0.1  0.1138889
-#> 4         0.1  0.1138889
-#> 5         0.1  0.1138889
-#> 6         0.1  0.1138889
+#> 1         0.1  0.1464286
+#> 2         0.2  0.2157895
+#> 3         0.1  0.1464286
+#> 4         0.1  0.1464286
+#> 5         0.1  0.1464286
+#> 6         0.2  0.2157895
 ```
 
 Alternatively, users can load the .RData file that contains the same

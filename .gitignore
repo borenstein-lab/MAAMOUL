@@ -11,3 +11,4 @@ inst/doc
 /Meta/
 .Rbuildignore
 build_commands.txt
+/test_outputs

@@ -19,7 +19,7 @@ Muller E, Baum S, and Borenstein E. **“MAAMOUL: Metabolic network-based
 discovery of microbiome-metabolome shifts in disease”** *In
 preparation*.
 
-![](reference/figures/Figure%201.svg)
+![MAAMOUL illustration](reference/figures/Figure%201.svg)
 
 ------------------------------------------------------------------------
 

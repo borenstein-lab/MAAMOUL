@@ -8,12 +8,12 @@
 <title>MAAMOUL Tutorial • MAAMOUL</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="MAAMOUL Tutorial">
 <style>
-  html { font-size: 0.85rem; }
-  pre, code { font-size: 0.85rem; }
+  html { font-size: 0.8rem; }
+  pre, code { font-size: 0.8rem; }
 </style>
 </head>
 <body>
@@ -124,8 +124,8 @@ are ignored. Column names are ignored as well.</li>
 <div class="section level4">
 <h4 id="building-your-own-network">Building your own network<a class="anchor" aria-label="anchor" href="#building-your-own-network"></a>
 </h4>
-<p>Users can construct a network from databases such as KEGG (<a href="https://www.genome.jp/kegg/" class="external-link uri">https://www.genome.jp/kegg/</a>), MetaCyc (<a href="https://metacyc.org/" class="external-link uri">https://metacyc.org/</a>), or
-other resources.</p>
+<p>Users can construct a global metabolic network from databases such as
+<a href="https://www.genome.jp/kegg/" class="external-link">KEGG</a>, <a href="https://metacyc.org/" class="external-link">MetaCyc</a>, <a href="http://bigg.ucsd.edu/" class="external-link">BiGG</a>, or other resources.</p>
 <p>When building a custom network, we recommend:</p>
 <ul>
 <li>Removing very small connected components;<br>
@@ -141,6 +141,22 @@ knowledge;<br>
 → e.g., ECs not linked to bacteria when studying the gut
 microbiome.</li>
 </ul>
+<blockquote>
+<p>Note: More curated metabolic reconstructions may improve the
+biological specificity of the identified modules! Users may potentially
+construct custom community-wide metabolic networks using genome-scale
+metabolic reconstruction pipelines (e.g., <a href="https://doi.org/10.1093/nar/gky537" class="external-link">CarveMe</a>, <a href="https://doi.org/10.1093/nar/gkab815" class="external-link">metaGEM</a>, or <a href="https://doi.org/10.1093/bioinformatics/btac082" class="external-link">mgPipe</a>) and
+resources such as <a href="https://www.nature.com/articles/s41587-022-01628-0" class="external-link">AGORA2</a> or
+<a href="https://doi.org/10.1016/j.cels.2025.101196" class="external-link">APOLLO</a>. While
+these metabolic models typically include additional information such as
+stoichiometry, biomass equations, and other biochemical constraints,
+MAAMOUL currently utilizes only the network topology (so users will need
+to extract an undirected bipartite graph connecting enzyme/reaction
+nodes and metabolite nodes). Users should also ensure that metabolite
+identifiers used in the metabolomic data are compatible with those used
+in the selected metabolic model/network, which may require additional
+metabolite ID conversion steps.</p>
+</blockquote>
 </div>
 <div class="section level4">
 <h4 id="basic-network-diagnostics">Basic network diagnostics<a class="anchor" aria-label="anchor" href="#basic-network-diagnostics"></a>
@@ -166,7 +182,7 @@ microbiome.</li>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expansion.html" class="external-link">expansion</a></span><span class="op">(</span>mult <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">0.5</span>, size <span class="op">=</span> <span class="fl">11</span>, face <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="maamoul_tutorial_files/figure-html/unnamed-chunk-3-1.png" class="r-plt" width="384"></p>
+<p><img src="maamoul_tutorial_files/figure-html/unnamed-chunk-3-1.png" class="r-plt" alt="" width="384"></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># Connected components</span></span>
@@ -302,27 +318,36 @@ of modules’ significance.</p>
 <span>  N_VAL_PERM <span class="op">=</span> <span class="fl">9</span>,</span>
 <span>  N_THREADS <span class="op">=</span> <span class="fl">2</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: package 'graph' was built under R version 4.4.2</span></span>
-<span><span class="co">#&gt; INFO [2026-03-27 11:11:11] Output directory "test_outputs" already exists. Files may be overriden.</span></span>
-<span><span class="co">#&gt; INFO [2026-03-27 11:11:11] Working directory is: /Users/em2035/Library/CloudStorage/OneDrive-UniversityofCambridge/Documents/GitHub/MAAMOUL/vignettes.</span></span>
-<span><span class="co">#&gt; INFO [2026-03-27 11:11:11] Starting module-identification pipeline.</span></span>
-<span><span class="co">#&gt; INFO [2026-03-27 11:11:11] Note that 63 duplicated metabolites were identified and only the ones with minimal p-values are kept.</span></span>
-<span><span class="co">#&gt; INFO [2026-03-27 11:11:11] Note that 29 duplicated ECs were identified and only the ones with minimal p-values are kept.</span></span>
-<span><span class="co">#&gt; INFO [2026-03-27 11:11:11] Loaded network information and feature p-values.</span></span>
-<span><span class="co">#&gt; INFO [2026-03-27 11:11:11] 99 of 174 observed metabolite features are also in the network.</span></span>
-<span><span class="co">#&gt; INFO [2026-03-27 11:11:11] 1004 of 1568 observed EC features are also in the network.</span></span>
-<span><span class="co">#&gt; INFO [2026-03-27 11:11:11] 1103 of 4711 network nodes are observed in the data.</span></span>
-<span><span class="co">#&gt; INFO [2026-03-27 11:11:11] Metabolite p-value threshold based on BUM: 0.1989.</span></span>
-<span><span class="co">#&gt; INFO [2026-03-27 11:11:11] EC p-value threshold based on BUM: 0.0461.</span></span>
-<span><span class="co">#&gt; INFO [2026-03-27 11:11:11] Found 255 EC anchor nodes and 69 metabolite anchor nodes.</span></span>
-<span><span class="co">#&gt; INFO [2026-03-27 11:11:11] Constructed a node-weighted network, with 4711 nodes and 6253 edges.</span></span>
-<span><span class="co">#&gt; INFO [2026-03-27 11:11:11] Starting graph random coloring iterations</span></span>
-<span><span class="co">#&gt; .INFO [2026-03-27 11:11:38] End of graph random coloring iterations</span></span>
-<span><span class="co">#&gt; INFO [2026-03-27 11:11:40] Identified a total of 41 modules (before significance testing).</span></span>
-<span><span class="co">#&gt;   |                                                                              |                                                                      |   0%INFO [2026-03-27 11:11:44] Starting graph random coloring iterations - permuted graphs.</span></span>
-<span><span class="co">#&gt;   |                                                                              |========                                                              |  11%  |                                                                              |================                                                      |  22%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================                                       |  44%  |                                                                              |=======================================                               |  56%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================                |  78%  |                                                                              |==============================================================        |  89%  |                                                                              |======================================================================| 100%INFO [2026-03-27 11:14:29] Finished graph random coloring iterations - permuted graphs.</span></span>
-<span><span class="co">#&gt; INFO [2026-03-27 11:14:29] Computed modules' significance.</span></span>
-<span><span class="co">#&gt; INFO [2026-03-27 11:14:35] Done!</span></span>
+<span><span class="co">#&gt; INFO [2026-05-09 22:03:18] Output directory "test_outputs" already exists. Files may be overriden.</span></span>
+<span><span class="co">#&gt; INFO [2026-05-09 22:03:18] Working directory is: /Users/em2035/Library/CloudStorage/OneDrive-UniversityofCambridge/Documents/GitHub/MAAMOUL/vignettes.</span></span>
+<span><span class="co">#&gt; INFO [2026-05-09 22:03:18] Starting module-identification pipeline.</span></span>
+<span><span class="co">#&gt; INFO [2026-05-09 22:03:18] Note that 63 duplicated metabolites were identified and only the ones with minimal p-values are kept.</span></span>
+<span><span class="co">#&gt; INFO [2026-05-09 22:03:18] Note that 29 duplicated ECs were identified and only the ones with minimal p-values are kept.</span></span>
+<span><span class="co">#&gt; INFO [2026-05-09 22:03:18] Loaded network information and feature p-values.</span></span>
+<span><span class="co">#&gt; INFO [2026-05-09 22:03:18] 99 of 174 observed metabolite features are also in the network.</span></span>
+<span><span class="co">#&gt; INFO [2026-05-09 22:03:18] 1004 of 1568 observed EC features are also in the network.</span></span>
+<span><span class="co">#&gt; INFO [2026-05-09 22:03:18] 1103 of 4711 network nodes are observed in the data.</span></span>
+<span><span class="co">#&gt; INFO [2026-05-09 22:03:18] Metabolite p-value threshold based on BUM: 0.1989.</span></span>
+<span><span class="co">#&gt; INFO [2026-05-09 22:03:18] EC p-value threshold based on BUM: 0.0461.</span></span>
+<span><span class="co">#&gt; INFO [2026-05-09 22:03:18] Found 255 EC anchor nodes and 69 metabolite anchor nodes.</span></span>
+<span><span class="co">#&gt; INFO [2026-05-09 22:03:18] Constructed a node-weighted network, with 4711 nodes and 6253 edges.</span></span>
+<span><span class="co">#&gt; INFO [2026-05-09 22:03:18] Starting graph random coloring iterations</span></span>
+<span><span class="co">#&gt; .INFO [2026-05-09 22:03:34] End of graph random coloring iterations</span></span>
+<span><span class="co">#&gt; Warning in grSoftVersion(): unable to load shared object '/Library/Frameworks/R.framework/Resources/modules//R_X11.so':</span></span>
+<span><span class="co">#&gt;   dlopen(/Library/Frameworks/R.framework/Resources/modules//R_X11.so, 0x0006): Library not loaded: /opt/X11/lib/libSM.6.dylib</span></span>
+<span><span class="co">#&gt;   Referenced from: &lt;C09D78D1-7747-3352-8D6A-DBD3D49D82B0&gt; /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/modules/R_X11.so</span></span>
+<span><span class="co">#&gt;   Reason: tried: '/opt/X11/lib/libSM.6.dylib' (no such file), '/System/Volumes/Preboot/Cryptexes/OS/opt/X11/lib/libSM.6.dylib' (no such file), '/opt/X11/lib/libSM.6.dylib' (no such file), '/Library/Frameworks/R.framework/Resources/lib/libSM.6.dylib' (no such file), '/Library/Java/JavaVirtualMachines/jdk-11.0.18+10/Contents/Home/lib/server/libSM.6.dylib' (no such file)</span></span>
+<span><span class="co">#&gt; Warning in cairoVersion(): unable to load shared object '/Library/Frameworks/R.framework/Resources/library/grDevices/libs//cairo.so':</span></span>
+<span><span class="co">#&gt;   dlopen(/Library/Frameworks/R.framework/Resources/library/grDevices/libs//cairo.so, 0x0006): Library not loaded: /opt/X11/lib/libXrender.1.dylib</span></span>
+<span><span class="co">#&gt;   Referenced from: &lt;02FE3153-979A-31F7-9F1C-7F836882B951&gt; /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/grDevices/libs/cairo.so</span></span>
+<span><span class="co">#&gt;   Reason: tried: '/opt/X11/lib/libXrender.1.dylib' (no such file), '/System/Volumes/Preboot/Cryptexes/OS/opt/X11/lib/libXrender.1.dylib' (no such file), '/opt/X11/lib/libXrender.1.dylib' (no such file), '/Library/Frameworks/R.framework/Resources/lib/libXrender.1.dylib' (no such file), '/Library/Java/JavaVirtualMachines/jdk-11.0.18+10/Contents/Home/lib/server/libXrender.1.dylib' (no such file)</span></span>
+<span><span class="co">#&gt; Warning in svg(file = plot_outfile, width = p_width, height = 5): failed to</span></span>
+<span><span class="co">#&gt; load cairo DLL</span></span>
+<span><span class="co">#&gt; INFO [2026-05-09 22:03:34] Identified a total of 41 modules (before significance testing).</span></span>
+<span><span class="co">#&gt;   |                                                                              |                                                                      |   0%INFO [2026-05-09 22:03:39] Starting graph random coloring iterations - permuted graphs.</span></span>
+<span><span class="co">#&gt;   |                                                                              |========                                                              |  11%  |                                                                              |================                                                      |  22%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================                                       |  44%  |                                                                              |=======================================                               |  56%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================                |  78%  |                                                                              |==============================================================        |  89%  |                                                                              |======================================================================| 100%INFO [2026-05-09 22:04:58] Finished graph random coloring iterations - permuted graphs.</span></span>
+<span><span class="co">#&gt; INFO [2026-05-09 22:04:58] Computed modules' significance.</span></span>
+<span><span class="co">#&gt; INFO [2026-05-09 22:04:59] Done!</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="st">"MAAMOUL run completed. Results written to 'test_outputs/'."</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "MAAMOUL run completed. Results written to 'test_outputs/'."</span></span></code></pre></div>
 <p>See <code><a href="../reference/maamoul.html">?maamoul</a></code> for details about the parameters.</p>
@@ -355,10 +380,10 @@ background noise.</p>
 </ul>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html" class="external-link">include_graphics</a></span><span class="op">(</span><span class="st">"test_outputs/mtb_bum_fit.png"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="test_outputs/mtb_bum_fit.png" class="r-plt" width="350"></p>
+<p><img src="test_outputs/mtb_bum_fit.png" class="r-plt" alt="" width="350"></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html" class="external-link">include_graphics</a></span><span class="op">(</span><span class="st">"test_outputs/ec_bum_fit.png"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="test_outputs/ec_bum_fit.png" class="r-plt" width="350"></p>
+<p><img src="test_outputs/ec_bum_fit.png" class="r-plt" alt="" width="350"></p>
 <p>Each plot includes a histogram of p-values with the fitted BUM model
 (left) and a Q-Q plot comparing observed vs expected distributions
 (right).</p>
@@ -398,12 +423,12 @@ modules:</p>
 <span><span class="co">#&gt; 5         5         9                3             6       0.017673184</span></span>
 <span><span class="co">#&gt; 6         6         5                1             4       0.003197565</span></span>
 <span><span class="co">#&gt;   module_pval module_FDR</span></span>
-<span><span class="co">#&gt; 1         0.1  0.1138889</span></span>
-<span><span class="co">#&gt; 2         0.1  0.1138889</span></span>
-<span><span class="co">#&gt; 3         0.1  0.1138889</span></span>
-<span><span class="co">#&gt; 4         0.1  0.1138889</span></span>
-<span><span class="co">#&gt; 5         0.1  0.1138889</span></span>
-<span><span class="co">#&gt; 6         0.1  0.1138889</span></span></code></pre></div>
+<span><span class="co">#&gt; 1         0.1  0.1464286</span></span>
+<span><span class="co">#&gt; 2         0.2  0.2157895</span></span>
+<span><span class="co">#&gt; 3         0.1  0.1464286</span></span>
+<span><span class="co">#&gt; 4         0.1  0.1464286</span></span>
+<span><span class="co">#&gt; 5         0.1  0.1464286</span></span>
+<span><span class="co">#&gt; 6         0.2  0.2157895</span></span></code></pre></div>
 <p>Alternatively, users can load the .RData file that contains the same
 data frame (and additional objects):</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
@@ -494,7 +519,7 @@ assigned to each module:</p>
 <span></span>
 <span><span class="co"># Basic plot</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">g_sub</span>, vertex.size <span class="op">=</span> <span class="fl">10</span>, vertex.label.color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="maamoul_tutorial_files/figure-html/unnamed-chunk-14-1.png" class="r-plt" width="576"></p>
+<p><img src="maamoul_tutorial_files/figure-html/unnamed-chunk-14-1.png" class="r-plt" alt="" width="576"></p>
 <p>Or use a more advanced visualization:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Color nodes by type</span></span>
@@ -537,7 +562,7 @@ assigned to each module:</p>
 <span>  vertex.label.degree <span class="op">=</span> <span class="fl">3</span><span class="op">*</span><span class="va">pi</span><span class="op">/</span><span class="fl">2</span>,   </span>
 <span>  main <span class="op">=</span> <span class="st">"MAAMOUL module 3"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p><img src="maamoul_tutorial_files/figure-html/unnamed-chunk-15-1.png" class="r-plt" width="576"></p>
+<p><img src="maamoul_tutorial_files/figure-html/unnamed-chunk-15-1.png" class="r-plt" alt="" width="576"></p>
 </div>
 </div>
 <div class="section level3">

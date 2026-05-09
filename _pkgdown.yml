@@ -5,8 +5,8 @@ template:
   includes:
     in_header: |
       <style>
-        html { font-size: 0.85rem; }
-        pre, code { font-size: 0.85rem; }
+        html { font-size: 0.8rem; }
+        pre, code { font-size: 0.8rem; }
       </style>
 
 home:

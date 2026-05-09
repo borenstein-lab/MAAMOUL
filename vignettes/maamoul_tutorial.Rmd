@@ -5,7 +5,7 @@ output:
     toc: true
     toc_depth: 3
 vignette: >
-  %\VignetteIndexEntry{maamoul_tutorial}
+  %\VignetteIndexEntry{MAAMOUL Tutorial}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -54,7 +54,7 @@ Note:
 
 #### Building your own network
 
-Users can construct a network from databases such as KEGG (https://www.genome.jp/kegg/), MetaCyc (https://metacyc.org/), or other resources.   
+Users can construct a global metabolic network from databases such as [KEGG](https://www.genome.jp/kegg/), [MetaCyc](https://metacyc.org/), [BiGG](http://bigg.ucsd.edu/), or other resources.     
 
 When building a custom network, we recommend:   
 
@@ -63,7 +63,9 @@ When building a custom network, we recommend:
   → These can dramatically influence network topology. Especially important for currency metabolites (e.g., water, ATP) that connect to many reactions and may not be informative for the specific biological question.   
 * Filtering irrelevant ECs or metabolites based on prior knowledge;   
   → e.g., ECs not linked to bacteria when studying the gut microbiome.   
-  
+
+> Note: More curated metabolic reconstructions may improve the biological specificity of the identified modules! Users may potentially construct custom community-wide metabolic networks using genome-scale metabolic reconstruction pipelines (e.g., [CarveMe](https://doi.org/10.1093/nar/gky537), [metaGEM](https://doi.org/10.1093/nar/gkab815), or [mgPipe](https://doi.org/10.1093/bioinformatics/btac082)) and resources such as [AGORA2](https://www.nature.com/articles/s41587-022-01628-0) or [APOLLO](https://doi.org/10.1016/j.cels.2025.101196). While these metabolic models typically include additional information such as stoichiometry, biomass equations, and other biochemical constraints, MAAMOUL currently utilizes only the network topology (so users will need to extract an undirected bipartite graph connecting enzyme/reaction nodes and metabolite nodes). Users should also ensure that metabolite identifiers used in the metabolomic data are compatible with those used in the selected metabolic model/network, which may require additional metabolite ID conversion steps. 
+
 #### Basic network diagnostics
 
 To better understand your network, it is useful to inspect:   
