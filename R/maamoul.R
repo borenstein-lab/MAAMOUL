@@ -125,6 +125,7 @@ maamoul <- function(
   conflict_prefer("as_data_frame", "igraph", quiet = T)
   conflict_prefer("intersect", "base", quiet = T)
   conflict_prefer("setdiff", "base", quiet = T)
+  conflict_prefer("components", "igraph", quiet = T)
 
   # Verify that all parameters are valid ----
   if (is.character(global_network_edges) && !file.exists(global_network_edges)) stop('Invalid *global_network_edges* argument. File not found')
