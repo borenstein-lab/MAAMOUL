@@ -52,7 +52,7 @@ Note:
 * Each row in the table represents an edge;  
 * Only the first two columns of the table are used; additional columns are ignored. Column names are ignored as well.
 
-#### Building your own network
+*Building your own network*
 
 Users can construct a global metabolic network from databases such as [KEGG](https://www.genome.jp/kegg/), [MetaCyc](https://metacyc.org/), [BiGG](http://bigg.ucsd.edu/), or other resources.     
 
@@ -66,7 +66,7 @@ When building a custom network, we recommend:
 
 > Note: More curated metabolic reconstructions may improve the biological specificity of the identified modules! Users may potentially construct custom community-wide metabolic networks using genome-scale metabolic reconstruction pipelines (e.g., [CarveMe](https://doi.org/10.1093/nar/gky537), [metaGEM](https://doi.org/10.1093/nar/gkab815), or [mgPipe](https://doi.org/10.1093/bioinformatics/btac082)) and resources such as [AGORA2](https://www.nature.com/articles/s41587-022-01628-0) or [APOLLO](https://doi.org/10.1016/j.cels.2025.101196). While these metabolic models typically include additional information such as stoichiometry, biomass equations, and other biochemical constraints, MAAMOUL currently utilizes only the network topology (so users will need to extract an undirected bipartite graph connecting enzyme/reaction nodes and metabolite nodes). Users should also ensure that metabolite identifiers used in the metabolomic data are compatible with those used in the selected metabolic model/network, which may require additional metabolite ID conversion steps. 
 
-#### Basic network diagnostics
+*Basic network diagnostics*
 
 To better understand your network, it is useful to inspect:   
 
@@ -261,7 +261,7 @@ complete_modules %>%
   filter(module_id == 1)
 ```
 
-#### Visualizing a module as a network
+*Visualizing a module as a network*
 
 You can visualize a specific module using the underlying graph.
 
