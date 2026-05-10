@@ -33,14 +33,15 @@
 #' @param NODE_FDR_THRESHOLD The FDR threshold to determine which nodes should
 #'   be treated as 'anchors' (i.e. estimated to be disease-associated).
 #'   Default: 0.1.
-#' @param N_REPEATS The number of random coloring of nodes to perform.
+#' @param N_REPEATS The number of random assignments of p-values to unobserved 
+#'   nodes (i.e., the number of random data imputation iterations).
 #' @param MAX_DIST_BTWN_NODES A maximal distance between nodes for them to be
 #'   considered as taking part in the same disease-associated module.
 #'   Default: 4.
 #' @param HCLUST_METHOD Either 'average', 'single' or 'complete'. Default:
 #'   'average'. See `?hclust`.
 #' @param CUTREE_H The height at which the hierarchical tree is cut to determine
-#'   clusters.
+#'   clusters. Default: 0.8.
 #' @param MIN_MOD_SIZE The minimal size of a module to be outputted. Default: 3.
 #' @param MIN_METS_IN_MOD Modules with less than this number of metabolite nodes
 #'   will be discarded. Default: 0.
@@ -49,7 +50,7 @@
 #' @param N_VAL_PERM Number of node-weight permutations to perform for
 #'   calculating the significance of each module.
 #' @param MODULE_FDR_THRESHOLD The FDR threshold to determine which modules are
-#'   significant.
+#'   significant. Default: 0.2.
 #' @param N_THREADS Number of threads to use for parallel computing. Verify a
 #'   sufficient number of cores with `parallel::detectCores()` first.
 #'

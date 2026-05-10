@@ -53,7 +53,8 @@ If the table is already loaded in R, it can also be directly provided as a data 
 be treated as 'anchors' (i.e. estimated to be disease-associated).
 Default: 0.1.}
 
-\item{N_REPEATS}{The number of random coloring of nodes to perform.}
+\item{N_REPEATS}{The number of random assignments of p-values to unobserved 
+nodes (i.e., the number of random data imputation iterations).}
 
 \item{MAX_DIST_BTWN_NODES}{A maximal distance between nodes for them to be
 considered as taking part in the same disease-associated module.
@@ -63,7 +64,7 @@ Default: 4.}
 'average'. See `?hclust`.}
 
 \item{CUTREE_H}{The height at which the hierarchical tree is cut to determine
-clusters.}
+clusters. Default: 0.8.}
 
 \item{MIN_MOD_SIZE}{The minimal size of a module to be outputted. Default: 3.}
 
@@ -77,7 +78,7 @@ will be discarded. Default: 0.}
 calculating the significance of each module.}
 
 \item{MODULE_FDR_THRESHOLD}{The FDR threshold to determine which modules are
-significant.}
+significant. Default: 0.2.}
 
 \item{N_THREADS}{Number of threads to use for parallel computing. Verify a
 sufficient number of cores with `parallel::detectCores()` first.}
