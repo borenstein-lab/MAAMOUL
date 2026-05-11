@@ -8,7 +8,7 @@
 read_inputs <- function(global_network_edges, ec_pvals, metabolite_pvals) {
 
   # Read clean network files
-  if (is_character(global_network_edges)) {
+  if (is.character(global_network_edges)) {
     edges <- read_csv(global_network_edges, show_col_types = FALSE)
   } else { # Users can also provide the data frame if already loaded in R
     edges <- global_network_edges
@@ -18,7 +18,7 @@ read_inputs <- function(global_network_edges, ec_pvals, metabolite_pvals) {
   edges <- edges %>% select(1:2) %>% rename(from = 1, to = 2)
 
   # Read node p-values
-  if (is_character(metabolite_pvals)) {
+  if (is.character(metabolite_pvals)) {
     mtb_pvals <- read_delim(
       metabolite_pvals,
       show_col_types = FALSE,
@@ -30,7 +30,7 @@ read_inputs <- function(global_network_edges, ec_pvals, metabolite_pvals) {
     mtb_pvals <- metabolite_pvals
   }
   
-  if (is_character(ec_pvals)) {
+  if (is.character(ec_pvals)) {
     ec_pvals <- read_delim(
       ec_pvals,
       show_col_types = FALSE,
@@ -198,7 +198,7 @@ get_anchor_matrix <- function(
     )
 
     # Get the graph induced by red nodes only
-    g_rand <- delete_vertices(g_rand, V(g_rand)[V(g_rand)$color_rand == 2])
+    g_rand <- delete.vertices(g_rand, V(g_rand)[V(g_rand)$color_rand == 2])
 
     # Get shortest distances between every pair of anchor nodes
     anchors_in_g_rand <- anchors[anchors %in% V(g_rand)$name]

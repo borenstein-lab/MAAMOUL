@@ -74,7 +74,7 @@ steinertree_KB <- function(terminals, g) {
   }
 
   # Optimize
-  stree <- mst(induced_subgraph(g, subtrees[[1]]))
+  stree <- mst(induced.subgraph(g, subtrees[[1]]))
   non_temrinal_leafs <- igraph::degree(stree, v = setdiff(V(stree)$name, terminals))
   non_temrinal_leafs <- names(non_temrinal_leafs)[non_temrinal_leafs == 1]
   while(length(non_temrinal_leafs) > 0) {

@@ -335,6 +335,13 @@ maamoul <- function(
     modules_overview,
     module_assignments
     )
+  
+  # Add information about module size (including non-anchor nodes) in the modules overview table
+  modules_overview <- modules_overview %>%
+    left_join(complete_modules %>% 
+                group_by(module_id) %>% 
+                summarise(n_nodes_total = n()),
+              by = 'module_id')
 
   # ----------------------------------------------------------------------------
   # 7. Also find modules in node-permuted graphs ----
