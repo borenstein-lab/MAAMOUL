@@ -78,7 +78,8 @@ maamoul(
 
 - N_REPEATS:
 
-  The number of random coloring of nodes to perform.
+  The number of random assignments of p-values to unobserved nodes
+  (i.e., the number of random data imputation iterations).
 
 - MAX_DIST_BTWN_NODES:
 
@@ -93,7 +94,7 @@ maamoul(
 - CUTREE_H:
 
   The height at which the hierarchical tree is cut to determine
-  clusters.
+  clusters. Default: 0.8.
 
 - MIN_MOD_SIZE:
 
@@ -116,7 +117,8 @@ maamoul(
 
 - MODULE_FDR_THRESHOLD:
 
-  The FDR threshold to determine which modules are significant.
+  The FDR threshold to determine which modules are significant. Default:
+  0.2.
 
 - N_THREADS:
 

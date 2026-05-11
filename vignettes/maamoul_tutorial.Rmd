@@ -228,7 +228,8 @@ __Key columns__
 
 * `module_id` → unique identifier of the module   
 * `n_anchors_metabs` → number of significant disease-associated metabolites included in this module   
-* `n_anchors_ECs` → number of significant disease-associated ECs included in this module   
+* `n_anchors_ECs` → number of significant disease-associated ECs included in this module  
+* `n_nodes_total` → total number of nodes in the module, not only anchors
 * `module_pval` → permutation-based module significance   
 * `module_FDR` → FDR-corrected significance   
 
@@ -236,7 +237,8 @@ Useful questions to ask:
 
 * How many modules were identified?   
 * How many are statistically significant (e.g., FDR < 0.1)?   
-* Do some modules include both disease-associated ECs and disease-associated metabolites?   
+* How many of the nodes in the interesting modules are disease-associated (`n_anchors`) vs. additional nodes that were added  to complete the module (`n_nodes_total-n_anchors`)?    
+* Do some modules include both disease-associated ECs and disease-associated metabolites?  
 
 Modules that include both data types are often the most biologically informative, as they link functional potential with metabolic outcomes.
 
