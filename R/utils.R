@@ -308,6 +308,112 @@ extract_modules_with_hclust <- function(
     ))
 }
 
+#' Identify modules using graph community detection
+#'
+#' @noRd
+extract_modules_with_community_detection <- function(
+    anchors_mat,
+    g_nodes,
+    MIN_MODULE_SIZE,
+    MIN_METABOLITES_IN_MODULE,
+    MIN_ECS_IN_MODULE,
+    EDGE_WEIGHT_THRESHOLD = 0.5,
+    COMMUNITY_METHOD = 'louvain'
+) {
+  
+  require(igraph)
+  require(dplyr)
+  require(ggraph)
+  require(ggplot2)
+  
+  # Convert similarity matrix into weighted graph ----
+  # Remove self-connections
+  diag(anchors_mat) <- 0
+  
+  # Create graph ----
+  g <- graph_from_adjacency_matrix(
+    anchors_mat,
+    mode = "undirected",
+    weighted = TRUE,
+    diag = FALSE
+  )
+  
+  # Remove weak edges
+  g <- delete.edges(g, E(g)[weight < EDGE_WEIGHT_THRESHOLD])
+  
+  # Remove isolated nodes
+  g <- delete.vertices(g,degree(g) == 0)
+  
+  # Run community detection ----
+  if (COMMUNITY_METHOD == 'louvain') {
+    
+    cl <- cluster_louvain(g, weights = E(g)$weight)
+    
+  } else if (COMMUNITY_METHOD == 'walktrap') {
+    
+    cl <- cluster_walktrap(g, weights = E(g)$weight)
+    
+  } else if (COMMUNITY_METHOD == 'fast_greedy') {
+    
+    cl <- cluster_fast_greedy(g, weights = E(g)$weight)
+    
+  } 
+  
+  modules <- membership(cl)
+  
+  # Create module assignment table ----
+  modules_df <- data.frame(
+    name = names(modules),
+    tmp_module_id = unname(modules)
+  ) %>%
+    
+    # Add node information
+    left_join(g_nodes, by = 'name') %>%
+    
+    # Compute module summaries
+    group_by(tmp_module_id) %>%
+    mutate(
+      n_anchors = n(),
+      n_anchors_metabs = sum(type == 'Metabolite'),
+      n_anchors_ECs = sum(type == 'EC'),
+      mean_pval_anchors = mean(pval)
+    ) %>%
+    ungroup() %>%
+    
+    # Filter modules
+    filter(
+      n_anchors >= MIN_MODULE_SIZE,
+      n_anchors_metabs >= MIN_METABOLITES_IN_MODULE,
+      n_anchors_ECs >= MIN_ECS_IN_MODULE
+    ) %>%
+    
+    # Renumber modules
+    group_by(tmp_module_id) %>%
+    mutate(module_id = cur_group_id()) %>%
+    ungroup() %>%
+    
+    select(-tmp_module_id)
+  
+  # Create overview table ----
+  modules_overview <- modules_df %>%
+    select(
+      module_id,
+      n_anchors,
+      n_anchors_metabs,
+      n_anchors_ECs,
+      mean_pval_anchors
+    ) %>%
+    distinct()
+  
+  return(list(
+    module_assignments = modules_df,
+    modules_overview = modules_overview,
+    community_object = cl,
+    graph = g,
+    plot = p
+  ))
+}
+
 #' Permutes node attributes within each node type
 #'
 #' Assumes that graph nodes have an attribute called 'type'
