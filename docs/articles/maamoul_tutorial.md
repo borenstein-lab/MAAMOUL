@@ -251,21 +251,21 @@ res <- maamoul(
   N_VAL_PERM = 9,
   N_THREADS = 2
 )
-#> INFO [2026-05-11 14:01:17] Output directory "test_outputs" already exists. Files may be overriden.
-#> INFO [2026-05-11 14:01:17] Working directory is: /Users/em2035/Library/CloudStorage/OneDrive-UniversityofCambridge/Documents/GitHub/MAAMOUL/vignettes.
-#> INFO [2026-05-11 14:01:17] Starting module-identification pipeline.
-#> INFO [2026-05-11 14:01:17] Note that 63 duplicated metabolites were identified and only the ones with minimal p-values are kept.
-#> INFO [2026-05-11 14:01:17] Note that 29 duplicated ECs were identified and only the ones with minimal p-values are kept.
-#> INFO [2026-05-11 14:01:17] Loaded network information and feature p-values.
-#> INFO [2026-05-11 14:01:17] 99 of 174 observed metabolite features are also in the network.
-#> INFO [2026-05-11 14:01:17] 1004 of 1568 observed EC features are also in the network.
-#> INFO [2026-05-11 14:01:17] 1103 of 4711 network nodes are observed in the data.
-#> INFO [2026-05-11 14:01:17] Metabolite p-value threshold based on BUM: 0.1989.
-#> INFO [2026-05-11 14:01:17] EC p-value threshold based on BUM: 0.0461.
-#> INFO [2026-05-11 14:01:17] Found 255 EC anchor nodes and 69 metabolite anchor nodes.
-#> INFO [2026-05-11 14:01:17] Constructed a node-weighted network, with 4711 nodes and 6253 edges.
-#> INFO [2026-05-11 14:01:17] Starting graph random coloring iterations
-#> .INFO [2026-05-11 14:01:33] End of graph random coloring iterations
+#> INFO [2026-05-12 16:06:04] Output directory "test_outputs" already exists. Files may be overriden.
+#> INFO [2026-05-12 16:06:04] Working directory is: /Users/em2035/Library/CloudStorage/OneDrive-UniversityofCambridge/Documents/GitHub/MAAMOUL/vignettes.
+#> INFO [2026-05-12 16:06:04] Starting module-identification pipeline.
+#> INFO [2026-05-12 16:06:04] Note that 63 duplicated metabolites were identified and only the ones with minimal p-values are kept.
+#> INFO [2026-05-12 16:06:04] Note that 29 duplicated ECs were identified and only the ones with minimal p-values are kept.
+#> INFO [2026-05-12 16:06:04] Loaded network information and feature p-values.
+#> INFO [2026-05-12 16:06:04] 99 of 174 observed metabolite features are also in the network.
+#> INFO [2026-05-12 16:06:04] 1004 of 1568 observed EC features are also in the network.
+#> INFO [2026-05-12 16:06:04] 1103 of 4711 network nodes are observed in the data.
+#> INFO [2026-05-12 16:06:04] Metabolite p-value threshold based on BUM: 0.1989.
+#> INFO [2026-05-12 16:06:04] EC p-value threshold based on BUM: 0.0461.
+#> INFO [2026-05-12 16:06:04] Found 255 EC anchor nodes and 69 metabolite anchor nodes.
+#> INFO [2026-05-12 16:06:04] Constructed a node-weighted network, with 4711 nodes and 6253 edges.
+#> INFO [2026-05-12 16:06:04] Starting graph random coloring iterations
+#> .INFO [2026-05-12 16:06:20] End of graph random coloring iterations
 #> Warning in grSoftVersion(): unable to load shared object '/Library/Frameworks/R.framework/Resources/modules//R_X11.so':
 #>   dlopen(/Library/Frameworks/R.framework/Resources/modules//R_X11.so, 0x0006): Library not loaded: /opt/X11/lib/libSM.6.dylib
 #>   Referenced from: <C09D78D1-7747-3352-8D6A-DBD3D49D82B0> /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/modules/R_X11.so
@@ -276,11 +276,16 @@ res <- maamoul(
 #>   Reason: tried: '/opt/X11/lib/libXrender.1.dylib' (no such file), '/System/Volumes/Preboot/Cryptexes/OS/opt/X11/lib/libXrender.1.dylib' (no such file), '/opt/X11/lib/libXrender.1.dylib' (no such file), '/Library/Frameworks/R.framework/Resources/lib/libXrender.1.dylib' (no such file), '/Library/Java/JavaVirtualMachines/jdk-11.0.18+10/Contents/Home/lib/server/libXrender.1.dylib' (no such file)
 #> Warning in svg(file = plot_outfile, width = p_width, height = 5): failed to
 #> load cairo DLL
-#> INFO [2026-05-11 14:01:34] Identified a total of 41 modules (before significance testing).
-#>   |                                                                              |                                                                      |   0%INFO [2026-05-11 14:01:38] Starting graph random coloring iterations - permuted graphs.
-#>   |                                                                              |========                                                              |  11%  |                                                                              |================                                                      |  22%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================                                       |  44%  |                                                                              |=======================================                               |  56%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================                |  78%  |                                                                              |==============================================================        |  89%  |                                                                              |======================================================================| 100%INFO [2026-05-11 14:03:02] Finished graph random coloring iterations - permuted graphs.
-#> INFO [2026-05-11 14:03:02] Computed modules' significance.
-#> INFO [2026-05-11 14:03:03] Done!
+#> INFO [2026-05-12 16:06:20] Identified a total of 41 modules (before significance testing).
+#> ..........
+#> ..........
+#> ..........
+#> ..........
+#> .INFO [2026-05-12 16:06:24] Completed modules using Steiner Trees
+#>   |                                                                              |                                                                      |   0%INFO [2026-05-12 16:06:24] Starting graph random coloring iterations - permuted graphs.
+#>   |                                                                              |========                                                              |  11%  |                                                                              |================                                                      |  22%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================                                       |  44%  |                                                                              |=======================================                               |  56%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================                |  78%  |                                                                              |==============================================================        |  89%  |                                                                              |======================================================================| 100%INFO [2026-05-12 16:07:47] Finished graph random coloring iterations - permuted graphs.
+#> INFO [2026-05-12 16:07:47] Computed modules' significance.
+#> INFO [2026-05-12 16:07:47] Done!
 print("MAAMOUL run completed. Results written to 'test_outputs/'.")
 #> [1] "MAAMOUL run completed. Results written to 'test_outputs/'."
 ```
@@ -367,11 +372,11 @@ head(modules_overview)
 #> 5         5         9                3             6       0.017673184
 #> 6         6         5                1             4       0.003197565
 #>   n_nodes_total module_pval module_FDR
-#> 1             7         0.1  0.1242424
+#> 1             7         0.2  0.2102564
 #> 2             8         0.1  0.1242424
 #> 3            13         0.1  0.1242424
 #> 4             9         0.1  0.1242424
-#> 5            12         0.2  0.2216216
+#> 5            12         0.1  0.1242424
 #> 6             8         0.1  0.1242424
 ```
 
