@@ -138,32 +138,32 @@ maamoul <- function(
 
   # Verify that all parameters are valid ----
   if (is.character(global_network_edges) && !file.exists(global_network_edges)) stop('Invalid *global_network_edges* argument. File not found')
-  if (is.character(ec_pvals) && !file.exists(ec_pvals)) stop('Invalid *ec_pvals* argument. File not found')
+  if (is.character(ec_pvals) && !file.exists(ec_pvals))              stop('Invalid *ec_pvals* argument. File not found')
   if (is.character(metabolite_pvals) && !file.exists(metabolite_pvals)) stop('Invalid *metabolite_pvals* argument. File not found')
-  if (!is.numeric(NODE_FDR_THRESHOLD))         stop('Invalid *NODE_FDR_THRESHOLD* argument. Should be a number between 0 and 1 (recommended: <= 0.1)')
-  if (NODE_FDR_THRESHOLD <= 0 | NODE_FDR_THRESHOLD >= 1) stop('Invalid *NODE_FDR_THRESHOLD* argument. Should be a number between 0 and 1 (recommended: <= 0.1)')
-  if (!is.numeric(N_REPEATS))                  stop('Invalid *N_REPEATS* argument. Should be an integer > 10')
-  if (N_REPEATS < 10)                          stop('Invalid *N_REPEATS* argument. Should be an integer > 10')
-  if (!is.numeric(MAX_DIST_BTWN_NODES))         stop('Invalid *MAX_DIST_BTWN_NODES* argument. Should be an integer (recommended values 2-5)')
-  if (MAX_DIST_BTWN_NODES < 2 | MAX_DIST_BTWN_NODES > 6) stop('Invalid *MAX_DIST_BTWN_NODES* argument. Should be an integer (recommended values 2-5)')
-  if (!is.numeric(CUTREE_H))                   stop('Invalid *CUTREE_H* argument. Should be a number between 0 and 1')
-  if (CUTREE_H <= 0 | CUTREE_H >= 1)           stop('Invalid *CUTREE_H* argument. Should be a number between 0 and 1')
-  if (!is.numeric(COMMUNITY_DETECTION_THRESHOLD))      stop('Invalid *COMMUNITY_DETECTION_THRESHOLD* argument. Should be a number between 0 and 1')
-  if (COMMUNITY_DETECTION_THRESHOLD <= 0 | COMMUNITY_DETECTION_THRESHOLD >= 1) stop('Invalid *COMMUNITY_DETECTION_THRESHOLD* argument. Should be a number between 0 and 1')
-  if (!is.numeric(MIN_MOD_SIZE))               stop('Invalid *MIN_MOD_SIZE* argument. Should be an integer > 0')
-  if (MIN_MOD_SIZE < 1)                        stop('Invalid *MIN_MOD_SIZE* argument. Should be an integer > 0')
-  if (!is.numeric(MIN_METS_IN_MOD))            stop('Invalid *MIN_METS_IN_MOD* argument. Should be an integer >= 0')
-  if (MIN_METS_IN_MOD < 0)                     stop('Invalid *MIN_METS_IN_MOD* argument. Should be an integer >= 0')
-  if (!is.numeric(MIN_ECS_IN_MOD))             stop('Invalid *MIN_ECS_IN_MOD* argument. Should be an integer >= 0')
-  if (MIN_ECS_IN_MOD < 0)                      stop('Invalid *MIN_ECS_IN_MOD* argument. Should be an integer >= 0')
-  if (!is.numeric(N_VAL_PERM))                 stop('Invalid *N_VAL_PERM* argument. Should be an integer > 1')
-  if (N_VAL_PERM <= 1)                         stop('Invalid *N_VAL_PERM* argument. Should be an integer > 1')
-  if (! CLUSTER_METHOD %in% c('community','hclust'))         stop('Invalid *CLUSTER_METHOD* argument. Should be one of "community","hclust"')
-  if (! HCLUST_METHOD %in% c('complete','average','single')) stop('Invalid *HCLUST_METHOD* argument. Should be one of "average","single","complete"')
-  if (! COMMUNITY_DETECTION_METHOD %in% c('louvain'))        stop('Invalid *COMMUNITY_DETECTION_METHOD* argument. Should be "louvain" (only option supported)')
-  if (N_THREADS >= parallel::detectCores() | N_THREADS < 1)  stop('Invalid *N_THREADS* argument. Should be an integer between 1 and the number of available cores')
-  if (!is.numeric(MODULE_FDR_THRESHOLD))              stop('Invalid *MODULE_FDR_THRESHOLD* argument. Should be a number between 0 and 1 (recommended: <= 0.2)')
-  if (MODULE_FDR_THRESHOLD <= 0 | MODULE_FDR_THRESHOLD >= 1) stop('Invalid *MODULE_FDR_THRESHOLD* argument. Should be a number between 0 and 1 (recommended: <= 0.2)')
+  if (!is.numeric(NODE_FDR_THRESHOLD))                               stop('Invalid *NODE_FDR_THRESHOLD* argument. Should be a number between 0 and 1 (recommended: <= 0.1)')
+  if (NODE_FDR_THRESHOLD <= 0 | NODE_FDR_THRESHOLD >= 1)             stop('Invalid *NODE_FDR_THRESHOLD* argument. Should be a number between 0 and 1 (recommended: <= 0.1)')
+  if (!is.numeric(N_REPEATS))                                        stop('Invalid *N_REPEATS* argument. Should be an integer > 10')
+  if (N_REPEATS < 10)                                                stop('Invalid *N_REPEATS* argument. Should be an integer > 10')
+  if (!is.numeric(MAX_DIST_BTWN_NODES))                              stop('Invalid *MAX_DIST_BTWN_NODES* argument. Should be an integer (recommended values 2-5)')
+  if (MAX_DIST_BTWN_NODES < 2 | MAX_DIST_BTWN_NODES > 6)             stop('Invalid *MAX_DIST_BTWN_NODES* argument. Should be an integer (recommended values 2-5)')
+  if (CLUSTER_METHOD == 'hclust' && (!is.numeric(CUTREE_H)))         stop('Invalid *CUTREE_H* argument. Should be a number between 0 and 1')
+  if (CLUSTER_METHOD == 'hclust' && (CUTREE_H <= 0 | CUTREE_H >= 1)) stop('Invalid *CUTREE_H* argument. Should be a number between 0 and 1')
+  if (CLUSTER_METHOD == 'community' && (!is.numeric(COMMUNITY_DETECTION_THRESHOLD))) stop('Invalid *COMMUNITY_DETECTION_THRESHOLD* argument. Should be a number between 0 and 1')
+  if (CLUSTER_METHOD == 'community' && (COMMUNITY_DETECTION_THRESHOLD <= 0 | COMMUNITY_DETECTION_THRESHOLD >= 1)) stop('Invalid *COMMUNITY_DETECTION_THRESHOLD* argument. Should be a number between 0 and 1')
+  if (!is.numeric(MIN_MOD_SIZE))                                     stop('Invalid *MIN_MOD_SIZE* argument. Should be an integer > 0')
+  if (MIN_MOD_SIZE < 1)                                              stop('Invalid *MIN_MOD_SIZE* argument. Should be an integer > 0')
+  if (!is.numeric(MIN_METS_IN_MOD))                                  stop('Invalid *MIN_METS_IN_MOD* argument. Should be an integer >= 0')
+  if (MIN_METS_IN_MOD < 0)                                           stop('Invalid *MIN_METS_IN_MOD* argument. Should be an integer >= 0')
+  if (!is.numeric(MIN_ECS_IN_MOD))                                   stop('Invalid *MIN_ECS_IN_MOD* argument. Should be an integer >= 0')
+  if (MIN_ECS_IN_MOD < 0)                                            stop('Invalid *MIN_ECS_IN_MOD* argument. Should be an integer >= 0')
+  if (!is.numeric(N_VAL_PERM))                                       stop('Invalid *N_VAL_PERM* argument. Should be an integer > 1')
+  if (N_VAL_PERM <= 1)                                               stop('Invalid *N_VAL_PERM* argument. Should be an integer > 1')
+  if (! CLUSTER_METHOD %in% c('community','hclust'))                 stop('Invalid *CLUSTER_METHOD* argument. Should be one of "community","hclust"')
+  if (CLUSTER_METHOD == 'hclust' && (! HCLUST_METHOD %in% c('complete','average','single'))) stop('Invalid *HCLUST_METHOD* argument. Should be one of "average","single","complete"')
+  if (CLUSTER_METHOD == 'community' && (! COMMUNITY_DETECTION_METHOD %in% c('louvain')))        stop('Invalid *COMMUNITY_DETECTION_METHOD* argument. Should be "louvain" (only option supported)')
+  if (N_THREADS >= parallel::detectCores() | N_THREADS < 1)          stop('Invalid *N_THREADS* argument. Should be an integer between 1 and the number of available cores')
+  if (!is.numeric(MODULE_FDR_THRESHOLD))                             stop('Invalid *MODULE_FDR_THRESHOLD* argument. Should be a number between 0 and 1 (recommended: <= 0.2)')
+  if (MODULE_FDR_THRESHOLD <= 0 | MODULE_FDR_THRESHOLD >= 1)         stop('Invalid *MODULE_FDR_THRESHOLD* argument. Should be a number between 0 and 1 (recommended: <= 0.2)')
 
   # For rounding issues
   EPS = 0.000000001
@@ -335,6 +335,7 @@ maamoul <- function(
     modules_overview,
     module_assignments
     )
+  log_info('Completed modules using Steiner Trees')
   
   # Add information about module size (including non-anchor nodes) in the modules overview table
   modules_overview <- modules_overview %>%
@@ -349,11 +350,11 @@ maamoul <- function(
   # ...to later calculate true modules significance
   
   # Setup local cluster for parallel computing ----
-  cl <- makeCluster(N_THREADS)
+  cl <- makeCluster(N_THREADS, rscript_args = "--vanilla")
   registerDoSNOW(cl)
   pb <- txtProgressBar(max = N_VAL_PERM, style = 3)
   progress <- function(n) setTxtProgressBar(pb, n)
-
+  
   # Perform N_VAL_PERM permutations over node p-values, and then repeat all steps
   #  as before to get a "null distribution" of modules.
   log_info('Starting graph random coloring iterations - permuted graphs.')
@@ -380,16 +381,28 @@ maamoul <- function(
                 MAX_DIST_BETWEEN_RED_NODES = MAX_DIST_BTWN_NODES
               )
 
-              # Now use hierarchical clustering to get modules as before
-              tmp <- extract_modules_with_hclust(
-                anc_mat_shuffled,
-                g_nodes = as_data_frame(g_permuted, 'vertices'),
-                CUTREE_H,
-                MIN_MOD_SIZE,
-                MIN_METS_IN_MOD,
-                MIN_ECS_IN_MOD,
-                HCLUST_METHOD
-              )
+              # Now use clustering to get modules as before
+              if (CLUSTER_METHOD == 'hclust') {
+                tmp <- extract_modules_with_hclust(
+                  anchors_mat = anc_mat_shuffled,
+                  g_nodes = as_data_frame(g_permuted, 'vertices'),
+                  CUTREE_H = CUTREE_H,
+                  MIN_MODULE_SIZE = MIN_MOD_SIZE,
+                  MIN_METABOLITES_IN_MODULE = MIN_METS_IN_MOD,
+                  MIN_ECS_IN_MODULE = MIN_ECS_IN_MOD,
+                  HCLUST_METHOD = HCLUST_METHOD
+                )
+              } else if (CLUSTER_METHOD == "community") {
+                tmp <- extract_modules_with_community_detection(
+                  anchors_mat = anc_mat_shuffled,
+                  g_nodes = as_data_frame(g_permuted, 'vertices'),
+                  MIN_MODULE_SIZE = MIN_MOD_SIZE,
+                  MIN_METABOLITES_IN_MODULE = MIN_METS_IN_MOD,
+                  MIN_ECS_IN_MODULE = MIN_ECS_IN_MOD,
+                  EDGE_WEIGHT_THRESHOLD = COMMUNITY_DETECTION_THRESHOLD,
+                  COMMUNITY_DETECTION_METHOD = COMMUNITY_DETECTION_METHOD
+                )
+              }
 
               # Note: For the 'null' modules we are only interested in the
               #  number of EC and metabolite anchors and their average p value

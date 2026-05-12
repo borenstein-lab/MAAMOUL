@@ -198,7 +198,7 @@ get_anchor_matrix <- function(
     )
 
     # Get the graph induced by red nodes only
-    g_rand <- delete.vertices(g_rand, V(g_rand)[V(g_rand)$color_rand == 2])
+    g_rand <- delete_vertices(g_rand, V(g_rand)[V(g_rand)$color_rand == 2])
 
     # Get shortest distances between every pair of anchor nodes
     anchors_in_g_rand <- anchors[anchors %in% V(g_rand)$name]
@@ -256,12 +256,10 @@ extract_modules_with_hclust <- function(
   # Cut the dendogram tree at a specified height
   modules <- cutree(hc, h = CUTREE_H)
 
-  # Plot tree
-  dhc <- hc %>% as.dendrogram(hang = 0.05)
-  leaf_types <- 2-grepl('EC', hc$labels[hc$order]) # Marks EC leafs with 1 and metabolite leafs with 2
-
   # Plot
   if (!is.null(plot_outfile)) {
+    dhc <- hc %>% as.dendrogram(hang = 0.05)
+    leaf_types <- 2-grepl('EC', hc$labels[hc$order]) # Marks EC leafs with 1 and metabolite leafs with 2
     p_width = max(10, round(ncol(anchors_mat) / 15))
     svg(file = plot_outfile, width = p_width, height = 5)
     p <- dhc %>%
@@ -282,14 +280,18 @@ extract_modules_with_hclust <- function(
     # Remove tiny modules, or those not meeting the MIN_METABOLITES_IN_MODULE /
     #  MIN_ECS_IN_MODULE criteria
     group_by(tmp_module_id) %>%
-    mutate(n_anchors = n(),
-           n_anchors_metabs = sum(type == 'Metabolite'),
-           n_anchors_ECs = sum(type == 'EC'),
-           mean_pval_anchors = mean(pval)) %>%
+    mutate(
+        n_anchors = n(),
+        n_anchors_metabs = sum(type == 'Metabolite'),
+        n_anchors_ECs = sum(type == 'EC'),
+        mean_pval_anchors = mean(pval)
+      ) %>%
     ungroup() %>%
-    filter(n_anchors >= MIN_MODULE_SIZE &
-           n_anchors_metabs >= MIN_METABOLITES_IN_MODULE &
-           n_anchors_ECs >= MIN_ECS_IN_MODULE) %>%
+    filter(
+        n_anchors >= MIN_MODULE_SIZE &
+        n_anchors_metabs >= MIN_METABOLITES_IN_MODULE &
+        n_anchors_ECs >= MIN_ECS_IN_MODULE
+      ) %>%
     # Rename modules from 1 to ...
     group_by(tmp_module_id) %>%
     mutate(module_id = cur_group_id()) %>%
@@ -318,7 +320,7 @@ extract_modules_with_community_detection <- function(
     MIN_METABOLITES_IN_MODULE,
     MIN_ECS_IN_MODULE,
     EDGE_WEIGHT_THRESHOLD = 0.5,
-    COMMUNITY_METHOD = 'louvain'
+    COMMUNITY_DETECTION_METHOD = 'louvain'
 ) {
   
   require(igraph)
@@ -339,21 +341,22 @@ extract_modules_with_community_detection <- function(
   )
   
   # Remove weak edges
-  g <- delete.edges(g, E(g)[weight < EDGE_WEIGHT_THRESHOLD])
+  g <- delete_edges(g, E(g)[weight < EDGE_WEIGHT_THRESHOLD])
   
   # Remove isolated nodes
-  g <- delete.vertices(g,degree(g) == 0)
+  g <- delete_vertices(g, igraph::degree(g) == 0)
+  # plot(g, vertex.size = 3, vertex.label = NA)
   
   # Run community detection ----
-  if (COMMUNITY_METHOD == 'louvain') {
+  if (COMMUNITY_DETECTION_METHOD == 'louvain') {
     
     cl <- cluster_louvain(g, weights = E(g)$weight)
     
-  } else if (COMMUNITY_METHOD == 'walktrap') {
+  } else if (COMMUNITY_DETECTION_METHOD == 'walktrap') {
     
     cl <- cluster_walktrap(g, weights = E(g)$weight)
     
-  } else if (COMMUNITY_METHOD == 'fast_greedy') {
+  } else if (COMMUNITY_DETECTION_METHOD == 'fast_greedy') {
     
     cl <- cluster_fast_greedy(g, weights = E(g)$weight)
     
@@ -366,10 +369,8 @@ extract_modules_with_community_detection <- function(
     name = names(modules),
     tmp_module_id = unname(modules)
   ) %>%
-    
     # Add node information
     left_join(g_nodes, by = 'name') %>%
-    
     # Compute module summaries
     group_by(tmp_module_id) %>%
     mutate(
@@ -379,19 +380,16 @@ extract_modules_with_community_detection <- function(
       mean_pval_anchors = mean(pval)
     ) %>%
     ungroup() %>%
-    
     # Filter modules
     filter(
       n_anchors >= MIN_MODULE_SIZE,
       n_anchors_metabs >= MIN_METABOLITES_IN_MODULE,
       n_anchors_ECs >= MIN_ECS_IN_MODULE
     ) %>%
-    
     # Renumber modules
     group_by(tmp_module_id) %>%
     mutate(module_id = cur_group_id()) %>%
     ungroup() %>%
-    
     select(-tmp_module_id)
   
   # Create overview table ----
@@ -407,10 +405,7 @@ extract_modules_with_community_detection <- function(
   
   return(list(
     module_assignments = modules_df,
-    modules_overview = modules_overview,
-    community_object = cl,
-    graph = g,
-    plot = p
+    modules_overview = modules_overview
   ))
 }
 

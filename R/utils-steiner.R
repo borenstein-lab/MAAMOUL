@@ -100,6 +100,9 @@ complete_modules_with_steiner <- function(
 
   # Iterate over modules
   for (mod_id in modules_overview$module_id) {
+    cat('.')
+    if (mod_id%%10 == 0) cat('\n')
+    
     # Fetch module seeds (red nodes)
     module_anchor_nodes <- module_assignments %>%
       filter(module_id == mod_id) %>%

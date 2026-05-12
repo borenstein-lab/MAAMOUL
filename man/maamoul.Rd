@@ -14,8 +14,11 @@ maamoul(
   NODE_FDR_THRESHOLD = 0.1,
   N_REPEATS = 1000,
   MAX_DIST_BTWN_NODES = 4,
+  CLUSTER_METHOD = "hclust",
   HCLUST_METHOD = "average",
   CUTREE_H = 0.8,
+  COMMUNITY_DETECTION_METHOD = "louvain",
+  COMMUNITY_DETECTION_THRESHOLD = 0.5,
   MIN_MOD_SIZE = 3,
   MIN_ECS_IN_MOD = 0,
   MIN_METS_IN_MOD = 0,
@@ -60,11 +63,19 @@ nodes (i.e., the number of random data imputation iterations).}
 considered as taking part in the same disease-associated module.
 Default: 4.}
 
+\item{CLUSTER_METHOD}{Either "hclust" for hierarchical clustering or 
+"community" for community detection clustering.}
+
 \item{HCLUST_METHOD}{Either 'average', 'single' or 'complete'. Default:
 'average'. See `?hclust`.}
 
 \item{CUTREE_H}{The height at which the hierarchical tree is cut to determine
 clusters. Default: 0.8.}
+
+\item{COMMUNITY_DETECTION_METHOD}{Currently only "louvain" is supported.}
+
+\item{COMMUNITY_DETECTION_THRESHOLD}{Edge weight threshold for the community 
+detection algorithm.}
 
 \item{MIN_MOD_SIZE}{The minimal size of a module to be outputted. Default: 3.}
 
