@@ -198,7 +198,7 @@ get_anchor_matrix <- function(
     )
 
     # Get the graph induced by red nodes only
-    g_rand <- delete.vertices(g_rand, V(g_rand)[V(g_rand)$color_rand == 2])
+    g_rand <- delete_vertices(g_rand, V(g_rand)[V(g_rand)$color_rand == 2])
 
     # Get shortest distances between every pair of anchor nodes
     anchors_in_g_rand <- anchors[anchors %in% V(g_rand)$name]
@@ -256,20 +256,18 @@ extract_modules_with_hclust <- function(
   # Cut the dendogram tree at a specified height
   modules <- cutree(hc, h = CUTREE_H)
 
-  # Plot tree
+  # Plot
   dhc <- hc %>% as.dendrogram(hang = 0.05)
   leaf_types <- 2-grepl('EC', hc$labels[hc$order]) # Marks EC leafs with 1 and metabolite leafs with 2
-
-  # Plot
+  
   if (!is.null(plot_outfile)) {
     p_width = max(10, round(ncol(anchors_mat) / 15))
-    svg(file = plot_outfile, width = p_width, height = 5)
     p <- dhc %>%
       set("leaves_pch", c(17,19)[leaf_types]) %>%
       set("leaves_col", c("mediumorchid4", "darkgreen")[leaf_types]) %>%
       set("labels_cex", 0.3) %>%
       plot(); abline(h = CUTREE_H, col = adjustcolor("darkred", alpha = 0.5), lwd = 2)
-    dev.off()
+    ggsave(filename = plot_outfile, plot = p, width = p_width, height = 5)
   } else { p <- NA }
 
   # Create a small data frame with module assignments
