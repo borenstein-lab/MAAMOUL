@@ -10,7 +10,7 @@ steinertree_KB <- function(terminals, g) {
   # Helper function:
   # Given a graph and a set of nodes, return a list of connected components
   get_connected_comps <- function(g, all_nodes) {
-    g_induced <- induced.subgraph(g, vids = all_nodes)
+    g_induced <- induced_subgraph(g, vids = all_nodes)
     comps <- components(g_induced)
     lapply(1:comps$no, function(i, comps) {names(comps$membership)[comps$membership == i]}, comps)
   }
@@ -68,13 +68,13 @@ steinertree_KB <- function(terminals, g) {
     np <- length(nodes_on_shortest_paths)
     nodes_on_shortest_paths <- nodes_on_shortest_paths[[sample(np, size = 1)]]
 
-    # plot(induced.subgraph(g, unique(c(nodes_on_shortest_paths, unlist(subtrees)))))
+    # plot(induced_subgraph(g, unique(c(nodes_on_shortest_paths, unlist(subtrees)))))
     subtrees <- get_connected_comps(g, unique(c(nodes_on_shortest_paths, unlist(subtrees))))
     nsubtrees <- lapply(subtrees, function (r) setdiff(terminals, r))
   }
 
   # Optimize
-  stree <- mst(induced.subgraph(g, subtrees[[1]]))
+  stree <- mst(induced_subgraph(g, subtrees[[1]]))
   non_temrinal_leafs <- igraph::degree(stree, v = setdiff(V(stree)$name, terminals))
   non_temrinal_leafs <- names(non_temrinal_leafs)[non_temrinal_leafs == 1]
   while(length(non_temrinal_leafs) > 0) {
