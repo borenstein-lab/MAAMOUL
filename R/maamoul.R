@@ -89,7 +89,7 @@ maamoul <- function(
   CLUSTER_METHOD = "hclust",
   HCLUST_METHOD = 'average',
   CUTREE_H = 0.8,
-  COMMUNITY_DETECTION_METHOD = "louvain",
+  COMMUNITY_DETECTION_METHOD = "leiden",
   COMMUNITY_DETECTION_THRESHOLD = 0.5,
   MIN_MOD_SIZE = 3,
   MIN_ECS_IN_MOD = 0,
@@ -160,7 +160,7 @@ maamoul <- function(
   if (N_VAL_PERM <= 1)                                               stop('Invalid *N_VAL_PERM* argument. Should be an integer > 1')
   if (! CLUSTER_METHOD %in% c('community','hclust'))                 stop('Invalid *CLUSTER_METHOD* argument. Should be one of "community","hclust"')
   if (CLUSTER_METHOD == 'hclust' && (! HCLUST_METHOD %in% c('complete','average','single'))) stop('Invalid *HCLUST_METHOD* argument. Should be one of "average","single","complete"')
-  if (CLUSTER_METHOD == 'community' && (! COMMUNITY_DETECTION_METHOD %in% c('louvain')))        stop('Invalid *COMMUNITY_DETECTION_METHOD* argument. Should be "louvain" (only option supported)')
+  if (CLUSTER_METHOD == 'community' && (! COMMUNITY_DETECTION_METHOD %in% c('leiden','walktrap','fast_greedy')))        stop('Invalid *COMMUNITY_DETECTION_METHOD* argument. Should be one of "leiden", "walktrap", "fast_greedy"')
   if (N_THREADS >= parallel::detectCores() | N_THREADS < 1)          stop('Invalid *N_THREADS* argument. Should be an integer between 1 and the number of available cores')
   if (!is.numeric(MODULE_FDR_THRESHOLD))                             stop('Invalid *MODULE_FDR_THRESHOLD* argument. Should be a number between 0 and 1 (recommended: <= 0.2)')
   if (MODULE_FDR_THRESHOLD <= 0 | MODULE_FDR_THRESHOLD >= 1)         stop('Invalid *MODULE_FDR_THRESHOLD* argument. Should be a number between 0 and 1 (recommended: <= 0.2)')
@@ -420,7 +420,7 @@ maamoul <- function(
   stopCluster(cl)
 
   modules_perm <- bind_rows(
-    modules_overview %>% mutate(Permutation_ID = -1),
+    modules_overview %>% mutate(Permutation_ID = -1), # Add the "True" run
     modules_perm
   )
 
@@ -520,8 +520,11 @@ maamoul <- function(
   outfile2 <- file.path(out_dir, 'complete_modules.csv')
   outfile3 <- file.path(out_dir, 'graph_and_data.rdata')
   write_csv(modules_overview, outfile1)
+  log_info('Wrote file: ', outfile1)
   write_csv(complete_modules, outfile2)
+  log_info('Wrote file: ', outfile2)
   save(g_init, complete_modules, modules_overview, file = outfile3)
+  log_info('Wrote file: ', outfile3)
 
   log_info('Done!')
   return()

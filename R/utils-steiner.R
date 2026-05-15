@@ -78,7 +78,7 @@ steinertree_KB <- function(terminals, g) {
   non_temrinal_leafs <- igraph::degree(stree, v = setdiff(V(stree)$name, terminals))
   non_temrinal_leafs <- names(non_temrinal_leafs)[non_temrinal_leafs == 1]
   while(length(non_temrinal_leafs) > 0) {
-    stree <- delete.vertices(stree, v = non_temrinal_leafs)
+    stree <- delete_vertices(stree, v = non_temrinal_leafs)
     non_temrinal_leafs <- igraph::degree(stree, v = setdiff(V(stree)$name, terminals))
     non_temrinal_leafs <- names(non_temrinal_leafs)[non_temrinal_leafs == 1]
   }
@@ -121,12 +121,37 @@ complete_modules_with_steiner <- function(
       complete_modules,
       data.frame(
         node = module_all_nodes,
-        is_anchor = module_all_nodes %in% module_anchor_nodes,
+        is_anchor = V(g)$anchor[match(module_all_nodes, V(g)$name)] == 1,
         module_id = mod_id
       )
     )
   }
 
+  # # Some strict clustering methods seem to 'cut' larger modules, which after 
+  # #. completion with Steiner trees get stitched back together. 
+  # #. We identify these stitched modules and update their module IDs. 
+  # 
+  # ## First identify pairs of modules sharing at least one node
+  # module_edges <- complete_modules %>%
+  #   select(node, module_id) %>%
+  #   inner_join(complete_modules, by = "node", relationship = "many-to-many") %>%
+  #   filter(module_id.x < module_id.y) %>%
+  #   distinct(module_id.x, module_id.y)
+  # 
+  # ## Build a graph of module overlaps and extract connected components (= modules to merge)
+  # g_tmp <- graph_from_data_frame(
+  #   module_edges,
+  #   directed = FALSE,
+  #   vertices = tibble(module_id = unique(complete_modules$module_id))
+  # )
+  # module_id_old_to_new <- tibble(
+  #   module_id = as.integer(names(components(g_tmp)$membership)),
+  #   new_module_id = components(g_tmp)$membership
+  # )
+  # ## Attach new module IDs back to original table
+  # complete_modules <- complete_modules %>%
+  #   left_join(module_id_old_to_new, by = "module_id")
+  
   # Add p-values and other info
   complete_modules$pval <- vertex_attr(g, 'pval', complete_modules$node)
   complete_modules$type <- vertex_attr(g, 'type', complete_modules$node)

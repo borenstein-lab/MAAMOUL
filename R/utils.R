@@ -319,7 +319,7 @@ extract_modules_with_community_detection <- function(
     MIN_METABOLITES_IN_MODULE,
     MIN_ECS_IN_MODULE,
     EDGE_WEIGHT_THRESHOLD = 0.5,
-    COMMUNITY_DETECTION_METHOD = 'louvain'
+    COMMUNITY_DETECTION_METHOD = 'leiden'
 ) {
   
   require(igraph)
@@ -347,9 +347,9 @@ extract_modules_with_community_detection <- function(
   # plot(g, vertex.size = 3, vertex.label = NA)
   
   # Run community detection ----
-  if (COMMUNITY_DETECTION_METHOD == 'louvain') {
+  if (COMMUNITY_DETECTION_METHOD == 'leiden') {
     
-    cl <- cluster_louvain(g, weights = E(g)$weight)
+    cl <- cluster_leiden(g, weights = E(g)$weight, resolution = 0.1)
     
   } else if (COMMUNITY_DETECTION_METHOD == 'walktrap') {
     
