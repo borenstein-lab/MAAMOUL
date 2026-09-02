@@ -6,7 +6,7 @@ MAAMOUL is a knowledge-based computational method that integrates metagenomic an
 
 For further details see:    
 
-Muller E, Baum S, and Borenstein E. __"MAAMOUL: Metabolic network-based discovery of microbiome-metabolome shifts in disease"__ _In preparation_.
+Efrat Muller, Shiri Baum, Elhanan Borenstein, MAAMOUL: metabolic network-based discovery of microbiome-metabolome shifts in disease, Bioinformatics, Volume 42, Issue Supplement_2, August 2026, btag467, https://doi.org/10.1093/bioinformatics/btag467.
 
 <img src="man/figures/Figure 1.svg" width="800" alt="MAAMOUL illustration">
 
@@ -29,7 +29,7 @@ Note: The MAAMOUL package is dependent on the installation of the 'BioNet' packa
 
 ## Quick usage example
 
-Below is a quick usage example using on pre-compiled input tables based on data from Franzosa et al., _Nature Microbiology_, 2019.
+Below is a quick usage example using preprocessed input tables based on data from Franzosa et al., _Nature Microbiology_, 2019.
 
 ```
 # Load package
